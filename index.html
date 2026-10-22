@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jurassic World | Era dos Gigantes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;700;900&display=swap');
+:root{--green:#a8ed70;--dark:#102c27;--orange:#ffad55;--cream:#fff9df;--purple:#c9b5ff}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;background:#f5f6db;color:var(--dark);font-family:Nunito,sans-serif;overflow-x:hidden}
+button{font:inherit;cursor:pointer;border:0}
+h1,h2,h3,.logo{font-family:Fredoka,sans-serif}
+nav{position:sticky;top:0;z-index:50;background:#102c27f5;color:white;display:flex;justify-content:space-between;align-items:center;padding:13px 5%;gap:15px;flex-wrap:wrap;backdrop-filter:blur(10px)}
+.logo{font-size:23px;color:var(--green);font-weight:700}
+nav a{color:white;text-decoration:none;font-size:13px;font-weight:900;margin:0 7px}
+nav a:hover{color:var(--orange)}
+.pill{background:var(--green);color:var(--dark);padding:9px 15px;border-radius:30px;font-weight:900}
+.hero{min-height:610px;position:relative;overflow:hidden;background:linear-gradient(#60c5d8,#c2edbc 65%,#66a85e);display:flex;align-items:center;padding:65px 8%}
+.sun{position:absolute;width:125px;height:125px;background:#fff0a1;border-radius:50%;top:65px;right:14%;box-shadow:0 0 70px #ffe5a0}
+.mountain{position:absolute;bottom:0;left:0;width:100%;height:45%;background:#376c51;clip-path:polygon(0 65%,18% 12%,35% 62%,54% 8%,72% 63%,88% 20%,100% 60%,100% 100%,0 100%)}
+.mountain.back{height:36%;background:#5b9970;clip-path:polygon(0 60%,25% 0,48% 65%,70% 15%,100% 55%,100% 100%,0 100%)}
+.hero-content{position:relative;z-index:5;max-width:620px}
+.eyebrow{display:inline-block;background:#ffffffc9;padding:8px 14px;border-radius:30px;font-size:12px;font-weight:900;letter-spacing:1px}
+.hero h1{font-size:clamp(45px,8vw,88px);line-height:.96;margin:20px 0;color:#123c30;text-shadow:3px 3px #ffffff66}
+.hero h1 span{color:white}
+.hero p{max-width:480px;font-size:17px;line-height:1.8}
+.primary{background:var(--orange);padding:14px 22px;border-radius:16px;color:#392a16;font-weight:900;box-shadow:0 5px #d27b30;transition:.2s}
+.primary:hover{transform:translateY(-4px)}
+.hero-dino{position:absolute;z-index:4;right:7%;bottom:10%;font-size:clamp(120px,22vw,260px);filter:drop-shadow(0 15px 5px #20452b55);animation:bob 3s ease-in-out infinite;cursor:pointer}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-22px) rotate(2deg)}}
+.leaf{position:absolute;font-size:70px;animation:sway 4s infinite;transform-origin:bottom}
+.leaf.one{bottom:10px;left:3%}.leaf.two{bottom:15px;right:4%;animation-delay:1s}
+@keyframes sway{50%{transform:rotate(13deg)}}
+section{padding:75px 7%;scroll-margin-top:75px}
+.section-head{text-align:center;max-width:700px;margin:0 auto 38px}
+.kicker{color:#3f8b57;font-weight:900;letter-spacing:2px;font-size:12px;text-transform:uppercase}
+h2{font-size:clamp(32px,5vw,48px);margin:8px 0 12px}
+.section-head p{line-height:1.8;color:#52665a}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;padding:25px 7%;background:#163e31;color:white;text-align:center}
+.stat strong{display:block;font-family:Fredoka;font-size:32px;color:var(--green)}
+.stat span{font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.dino-card{background:white;border-radius:25px;overflow:hidden;box-shadow:0 8px 25px #163e3110;transition:.3s;border:2px solid transparent}
+.dino-card:hover{transform:translateY(-9px) rotate(-1deg);border-color:var(--green)}
+.dino-art{height:170px;display:grid;place-items:center;font-size:100px;position:relative}
+.dino-art span{animation:bob 3s infinite}
+.card-body{padding:20px}
+.card-body h3{font-size:24px;margin:0 0 8px}
+.card-body p{font-size:14px;line-height:1.7;color:#52665a}
+.tag{display:inline-block;background:#e6f6d9;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:900;margin:3px}
+.more{background:#183f32;color:white;padding:10px 14px;border-radius:12px;font-weight:900;margin-top:8px}
+.fact-box{background:#e0f4c9;border-radius:25px;padding:28px;text-align:center;margin-top:25px}
+.fact-box p{font-size:18px;line-height:1.7}
+.games{background:#173e32;color:white}
+.games .section-head p{color:#d2e5d2}
+.game-card{background:#24513f;border:1px solid #4e795f;padding:24px;border-radius:24px;display:flex;flex-direction:column;gap:12px}
+.game-card .game-icon{font-size:45px}
+.game-card h3{font-size:25px;margin:0}
+.game-card p{color:#d4e6d5;line-height:1.7;font-size:14px;flex:1}
+.game-card button{padding:12px;border-radius:12px;background:var(--green);font-weight:900;color:#173e32}
+.game-card button:hover{background:var(--orange)}
+.play-area{background:#102c27;padding:25px;border-radius:22px;margin-top:25px;display:none;text-align:center}
+.play-area.active{display:block;animation:appear .4s}
+@keyframes appear{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.answer{display:block;width:100%;padding:13px;margin:8px 0;border-radius:12px;background:#f5f6db;color:#173e32;font-weight:900}
+.answer:hover{background:var(--green)}
+.result{font-size:18px;font-weight:900;margin:15px}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:400px;margin:20px auto}
+.memory-tile{background:#e2f7ca;border-radius:12px;min-height:65px;font-size:30px}
+.memory-tile.found{background:#9de2a5}
+#dinoCanvas{background:linear-gradient(#8be0ef,#d4f4b6);width:100%;max-width:650px;border-radius:18px;display:block;margin:15px auto;touch-action:manipulation}
+.egg{display:inline-grid;place-items:center;width:105px;height:135px;font-size:65px;background:#d7f2c2;border-radius:55% 55% 48% 48%;margin:10px;transition:.3s;cursor:pointer}
+.egg:hover{transform:rotate(-8deg) scale(1.08)}
+.egg-result{font-size:20px;font-weight:900;min-height:45px}
+.timeline{border-left:4px solid #8bbd70;margin:25px auto;max-width:700px;padding-left:25px}
+.era{background:white;padding:20px;border-radius:18px;margin-bottom:18px;position:relative}
+.era:before{content:"";width:14px;height:14px;border-radius:50%;background:#ffad55;position:absolute;left:-34px;top:25px}
+.era h3{margin:0;font-size:22px}
+.era p{line-height:1.7}
+.quiz-score{color:var(--green);font-weight:900}
+footer{background:#0b211c;color:white;text-align:center;padding:35px 15px}
+footer strong{color:var(--green)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#102c27;color:white;padding:13px 22px;border-radius:30px;z-index:100;display:none;box-shadow:0 5px 20px #0003}
+.confetti{position:fixed;top:-20px;z-index:100;pointer-events:none;animation:fall 3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:0}}
+@media(max-width:700px){nav{justify-content:center}nav a{margin:0 4px}.hero{min-height:650px;align-items:flex-start;padding-top:65px}.hero-dino{right:8%;bottom:6%;font-size:150px;opacity:.92}.stats{grid-template-columns:repeat(2,1fr)}section{padding:55px 5%}.memory-grid{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body>
+<nav>
+ <div class="logo">🦖 JURASSIC WORLD</div>
+ <div>
+  <a href="#inicio">Início</a><a href="#especies">Espécies</a><a href="#historia">História</a><a href="#jogos">Jogos</a><a href="#fatos">Curiosidades</a>
+ </div>
+ <div class="pill">🏆 <span id="points">0</span> XP</div>
+</nav>
+
+<header class="hero" id="inicio">
+ <div class="sun"></div><div class="mountain back"></div><div class="mountain"></div>
+ <div class="hero-content">
+  <div class="eyebrow">🌿 EXPEDIÇÃO PRÉ-HISTÓRICA</div>
+  <h1>AVENTURA NA<br><span>ERA DOS</span><br>GIGANTES!</h1>
+  <p>Prepare-se para explorar um mundo extraordinário! Descubra criaturas incríveis, desvende mistérios antigos e torne-se um verdadeiro especialista em dinossauros.</p>
+  <button class="primary" onclick="document.querySelector('#especies').scrollIntoView()">🦕 EXPLORAR O MUNDO</button>
+  <button class="primary" onclick="document.querySelector('#jogos').scrollIntoView()" style="margin-left:8px;background:#d5c5ff;box-shadow:0 5px #9980dc">🎮 JOGAR</button>
+ </div>
+ <div class="hero-dino" onclick="roar(this)" title="Clique no dinossauro!">🦖</div>
+ <div class="leaf one">🌿</div><div class="leaf two">🌴</div>
+</header>
+
+<div class="stats">
+ <div class="stat"><strong>230 mi</strong><span>ANOS ATRÁS</span></div>
+ <div class="stat"><strong>1.000+</strong><span>GÊNEROS DESCRITOS</span></div>
+ <div class="stat"><strong>3</strong><span>GRANDES PERÍODOS</span></div>
+ <div class="stat"><strong>∞</strong><span>DESCOBERTAS!</span></div>
+</div>
+
+<section id="especies">
+ <div class="section-head"><div class="kicker">📖 ENCICLOPÉDIA JURÁSSICA</div><h2>Conheça os gigantes!</h2><p>Dos predadores mais famosos aos gigantes herbívoros, cada dinossauro tinha características únicas. Clique nos cartões para descobrir mais!</p></div>
+ <div class="grid" id="dinoGrid"></div>
+ <div class="fact-box"><h3>🔎 Qual dinossauro você quer conhecer?</h3><p>Pesquise uma espécie na nossa enciclopédia.</p><input id="searchDino" placeholder="Digite o nome de um dinossauro..." style="padding:14px;width:min(100%,420px);border:2px solid #b9d99a;border-radius:12px" oninput="searchDinos()"></div>
+</section>
+
+<section id="historia" style="background:#e7f0d4">
+ <div class="section-head"><div class="kicker">⏳ VIAGEM NO TEMPO</div><h2>A história da Terra</h2><p>Os dinossauros viveram durante a Era Mesozoica, dividida em três períodos principais.</p></div>
+ <div class="timeline">
+  <div class="era"><span class="tag">252–201 milhões de anos atrás</span><h3>🌋 Período Triássico</h3><p>Os primeiros dinossauros surgiram. Eram geralmente pequenos e viviam ao lado de muitos outros répteis. A vida começava a se diversificar depois de uma grande extinção.</p></div>
+  <div class="era"><span class="tag">201–145 milhões de anos atrás</span><h3>🌿 Período Jurássico</h3><p>Muitos dinossauros gigantes se diversificaram. Grandes saurópodes, como parentes do Diplodocus, percorriam ambientes com vegetação abundante. Os primeiros pássaros também apareceram nessa época.</p></div>
+  <div class="era"><span class="tag">145–66 milhões de anos atrás</span><h3>☄️ Período Cretáceo</h3><p>Tyrannosaurus rex e Triceratops viveram nesse período. Plantas com flores se espalharam e muitos grupos de dinossauros se diversificaram. Uma grande extinção encerrou a era.</p></div>
+ </div>
+ <div class="fact-box"><h3>🪶 Sabia desta?</h3><p>As aves atuais são descendentes de dinossauros terópodes. Isso significa que os dinossauros não desapareceram completamente!</p></div>
+</section>
+
+<section id="fatos">
+ <div class="section-head"><div class="kicker">🧠 CURIOSIDADES INCRÍVEIS</div><h2>Fatos que parecem mentira!</h2><p>Toque no botão para revelar uma nova curiosidade pré-histórica.</p></div>
+ <div class="fact-box" style="background:#fff"><div id="factEmoji" style="font-size:60px">🦴</div><p id="factText">Existem fósseis de dinossauros encontrados em todos os continentes, inclusive na Antártida!</p><button class="primary" onclick="nextFact()">✨ REVELAR CURIOSIDADE</button></div>
+ <div class="grid" style="margin-top:25px">
+  <div class="dino-card"><div class="dino-art" style="background:#d9edff">🦷</div><div class="card-body"><h3>Dentes especiais</h3><p>Os dentes variavam conforme a alimentação. Muitos terópodes tinham dentes serrilhados, enquanto diversos herbívoros possuíam estruturas para cortar ou triturar plantas.</p></div></div>
+  <div class="dino-card"><div class="dino-art" style="background:#ffe6bd">🥚</div><div class="card-body"><h3>Ovos fossilizados</h3><p>Fósseis de ovos e ninhos ajudam os cientistas a investigar como alguns dinossauros se reproduziam e cuidavam dos filhotes.</p></div></div>
+  <div class="dino-card"><div class="dino-art" style="background:#eadfff">🪶</div><div class="card-body"><h3>Dinossauros com penas</h3><p>Várias espécies tinham penas. Elas podiam ajudar no isolamento térmico, na exibição e, em alguns grupos, no voo.</p></div></div>
+ </div>
+</section>
+
+<section class="games" id="jogos">
+ <div class="section-head"><div class="kicker" style="color:var(--green)">🎮 CENTRAL DE AVENTURAS</div><h2>Hora de jogar!</h2><p>Teste seus conhecimentos, encontre pares, descubra fósseis e tente bater seus recordes. Cada desafio rende XP!</p></div>
+ <div class="grid">
+  <div class="game-card"><div class="game-icon">🧠</div><h3>Quiz jurássico</h3><p>Responda perguntas sobre dinossauros e prove que você conhece a pré-história.</p><button onclick="startQuiz()">COMEÇAR QUIZ →</button></div>
+  <div class="game-card"><div class="game-icon">🃏</div><h3>Memória fóssil</h3><p>Encontre os pares de dinossauros. Use a memória e complete o desafio com o menor número de tentativas.</p><button onclick="startMemory()">JOGAR MEMÓRIA →</button></div>
+  <div class="game-card"><div class="game-icon">🦴</div><h3>Caça aos fósseis</h3><p>Escolha os ovos misteriosos e descubra o que está escondido. Será um fóssil raro?</p><button onclick="startEggs()">PROCURAR FÓSSEIS →</button></div>
+  <div class="game-card"><div class="game-icon">❓</div><h3>Quem sou eu?</h3><p>Leia as pistas e adivinhe a espécie secreta antes de revelar a resposta.</p><button onclick="startRiddle()">DESCOBRIR ESPÉCIE →</button></div>
+  <div class="game-card"><div class="game-icon">🏃</div><h3>Fuga do T-Rex</h3><p>Pule os obstáculos e sobreviva o maior tempo possível nesta corrida pré-histórica.</p><button onclick="startRunner()">INICIAR CORRIDA →</button></div>
+  <div class="game-card"><div class="game-icon">🌋</div><h3>Desafio relâmpago</h3><p>Você tem 30 segundos para responder o máximo de perguntas corretamente.</p><button onclick="startBlitz()">DESAFIO DE 30 S →</button></div>
+ </div>
+ <div id="playArea" class="play-area">
+  <h2 id="gameTitle">🎮 Jogo</h2>
+  <div id="gameContent"></div>
+  <button class="primary" style="margin-top:20px" onclick="closeGame()">SAIR DO JOGO</button>
+ </div>
+</section>
+
+<section id="explore">
+ <div class="section-head"><div class="kicker">🥚 MISTÉRIOS DA FLORESTA</div><h2>Ovos-surpresa</h2><p>Escolha um ovo e descubra a criatura ou curiosidade escondida lá dentro!</p></div>
+ <div style="text-align:center" id="eggShowcase"></div>
+ <div class="fact-box"><h3>🏅 Seu progresso</h3><p>XP acumulado: <strong id="xpDisplay">0</strong></p><p>Dinossauros descobertos: <strong id="discovered">0</strong></p><p>Jogos concluídos: <strong id="gamesDone">0</strong></p><button class="primary" onclick="showAchievements()">VER CONQUISTAS 🏆</button><div id="achievementList"></div></div>
+</section>
+
+<footer><div style="font-size:38px">🦖 🌿 🦕</div><h2>O passado nunca foi tão divertido!</h2><p>Uma aventura pelo incrível mundo dos dinossauros.</p><p>Feito com 💚 para os exploradores da pré-história.</p><strong>JURASSIC WORLD • 2026</strong><p style="font-size:12px;color:#b9cbbb">Projeto educativo independente. Emojis usados como ilustrações.</p></footer>
+<div id="toast"></div>
+
+<script>
+const dinos=[
+{name:"Tyrannosaurus rex",short:"T. rex",emoji:"🦖",color:"#d8edbd",food:"Carnívoro",period:"Cretáceo",size:"Até cerca de 12–13 m",description:"Um dos predadores terrestres mais conhecidos. Tinha uma cabeça enorme, dentes robustos e braços relativamente curtos. Viveu na América do Norte.",fact:"Seu nome significa algo como 'rei dos lagartos tiranos'."},
+{name:"Triceratops",short:"Triceratops",emoji:"🦏",color:"#f8dfb7",food:"Herbívoro",period:"Cretáceo",size:"Até cerca de 9 m",description:"Possuía três chifres na cabeça e uma grande gola óssea. Seu bico e seus dentes ajudavam a cortar plantas.",fact:"Viveu na mesma época e região que o T. rex."},
+{name:"Brachiosaurus",short:"Braquiossauro",emoji:"🦕",color:"#cce8e8",food:"Herbívoro",period:"Jurássico",size:"Cerca de 20–22 m",description:"Um enorme saurópode com pescoço comprido e patas dianteiras altas. Sua anatomia ajudava a alcançar vegetação elevada.",fact:"Suas patas dianteiras eram mais compridas que as traseiras."},
+{name:"Stegosaurus",short:"Estegossauro",emoji:"🦕",color:"#eadbff",food:"Herbívoro",period:"Jurássico",size:"Cerca de 7–9 m",description:"Famoso pelas placas nas costas e pelos espinhos na cauda. Seu cérebro era pequeno em relação ao corpo.",fact:"As placas podem ter ajudado na exibição e na regulação de temperatura."},
+{name:"Velociraptor",short:"Velociraptor",emoji:"🦎",color:"#d3e9c0",food:"Carnívoro",period:"Cretáceo",size:"Cerca de 2 m de comprimento",description:"Era um terópode ágil e relativamente pequeno, com penas e uma garra curva em cada pé. Fósseis conhecidos vêm da Ásia.",fact:"O Velociraptor real era muito menor que o mostrado em muitos filmes."},
+{name:"Ankylosaurus",short:"Anquilossauro",emoji:"🛡️",color:"#ffdfbd",food:"Herbívoro",period:"Cretáceo",size:"Cerca de 6–8 m",description:"Seu corpo era protegido por placas ósseas e possuía uma grande estrutura óssea na ponta da cauda.",fact:"A armadura era uma de suas características mais marcantes."},
+{name:"Spinosaurus",short:"Espinossauro",emoji:"🐊",color:"#c5e6e5",food:"Predador, associado à pesca",period:"Cretáceo",size:"Estimativas variam",description:"Tinha um focinho alongado e uma grande estrutura em forma de vela nas costas. Evidências indicam uma forte associação com ambientes aquáticos.",fact:"É um dos terópodes mais peculiares já descobertos."},
+{name:"Parasaurolophus",short:"Parassaurolofo",emoji:"🦕",color:"#f5d6e5",food:"Herbívoro",period:"Cretáceo",size:"Cerca de 9–10 m",description:"Tinha uma longa crista tubular curvada para trás. Ela provavelmente ajudava na comunicação sonora e na identificação entre indivíduos.",fact:"Sua crista é uma das mais reconhecíveis do mundo dos dinossauros."}
+];
+let xp=0,discovered=new Set(),gamesDone=0,answered=new Set(),quizIndex=0,quizCorrect=0,memFirst=null,memLock=false,memMatches=0,memMoves=0,eggRounds=0,blitzTimer=null,blitzEnd=0,blitzScore=0,runnerFrame=null,runnerRunning=false;
+const $=id=>document.getElementById(id);
+function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.style.display='none',2300)}
+function addXP(n){xp+=n;$('points').textContent=xp;$('xpDisplay').textContent=xp}
+function celebrate(){for(let i=0;i<32;i++){const e=document.createElement('div');e.className='confetti';e.textContent=['🌿','⭐','🦴','🟢','✨'][Math.floor(Math.random()*5)];e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),3500)}}
+function roar(el){el.textContent='🦖';el.animate([{transform:'scale(1)'},{transform:'scale(1.3) rotate(8deg)'},{transform:'scale(1)'}],{duration:450});toast(['ROOOAR! 🦖','Bem-vindo à selva! 🌿','Dinossauro encontrado! 🦴'][Math.floor(Math.random()*3)])}
+function renderDinos(list=dinos){$('dinoGrid').innerHTML=list.map((d,i)=>`<article class="dino-card"><div class="dino-art" style="background:${d.color}"><span>${d.emoji}</span></div><div class="card-body"><h3>${d.name}</h3><span class="tag">${d.food}</span><span class="tag">${d.period}</span><p>${d.description}</p><button class="more" onclick="discover(${dinos.indexOf(d)})">DESCOBRIR MAIS ✨</button></div></article>`).join('')}
+function discover(i){const d=dinos[i];discovered.add(d.name);$('discovered').textContent=discovered.size;addXP(5);toast('🔎 '+d.name+': '+d.fact)}
+function searchDinos(){const q=$('searchDino').value.toLowerCase();renderDinos(dinos.filter(d=>(d.name+' '+d.food+' '+d.period).toLowerCase().includes(q)))}
+renderDinos();
+const facts=[
+['🦴','Fósseis de dinossauros foram encontrados em todos os continentes, inclusive na Antártida.'],
+['🪶','As aves são dinossauros vivos: descendem de dinossauros terópodes.'],
+['🦷','Alguns dinossauros substituíam os dentes ao longo da vida, podendo produzir várias gerações de dentes.'],
+['🌿','Nem todos os dinossauros eram gigantes. Algumas espécies tinham tamanho semelhante ao de uma galinha.'],
+['🥚','Ovos fossilizados ajudam pesquisadores a estudar o crescimento e a reprodução de dinossauros.'],
+['☄️','A extinção em massa de cerca de 66 milhões de anos atrás eliminou todos os dinossauros não avianos.'],
+['🌎','O nome Dinosauria foi criado pelo cientista Richard Owen em 1842.'],
+['🦕','O Argentinosaurus está entre os saurópodes gigantes, mas seu tamanho exato ainda é incerto.'],
+['👣','Pegadas fossilizadas mostram como alguns dinossauros caminhavam e se deslocavam.'],
+['🔬','Cientistas estudam fósseis usando técnicas como tomografia, microscopia e análise química.']
+];let factIndex=0;
+function nextFact(){factIndex=(factIndex+1)%facts.length;$('factEmoji').textContent=facts[factIndex][0];$('factText').textContent=facts[factIndex][1];addXP(1)}
+function openGame(title,html){$('playArea').classList.add('active');$('gameTitle').textContent=title;$('gameContent').innerHTML=html;$('playArea').scrollIntoView({behavior:'smooth',block:'center'})}
+function closeGame(){if(blitzTimer)clearInterval(blitzTimer);if(runnerFrame)cancelAnimationFrame(runnerFrame);runnerRunning=false;$('playArea').classList.remove('active')}
+function finishGame(points=10){gamesDone++;$('gamesDone').textContent=gamesDone;addXP(points);celebrate()}
+const quiz=[
+{q:'Qual destes dinossauros tinha três chifres?',opts:['Stegosaurus','Triceratops','Velociraptor','Brachiosaurus'],a:1,why:'O Triceratops tinha três chifres e uma grande gola óssea.'},
+{q:'Em qual período viveu o T. rex?',opts:['Triássico','Jurássico','Cretáceo','Pleistoceno'],a:2,why:'O T. rex viveu no final do Cretáceo.'},
+{q:'Qual grupo de animais descende dos dinossauros terópodes?',opts:['Aves','Tartarugas','Rãs','Lagartos atuais'],a:0,why:'As aves são descendentes de dinossauros terópodes.'},
+{q:'O que comia um dinossauro herbívoro?',opts:['Principalmente plantas','Somente peixes','Somente carne','Rochas'],a:0,why:'Herbívoros alimentavam-se de plantas.'},
+{q:'O que os fósseis podem revelar?',opts:['Só a cor exata','Informações sobre a vida antiga','O futuro','Nada sobre animais'],a:1,why:'Ossos, dentes, ovos e pegadas fornecem evidências sobre a vida antiga.'},
+{q:'Qual tinha placas nas costas?',opts:['Triceratops','Stegosaurus','T. rex','Velociraptor'],a:1,why:'O Stegosaurus é conhecido por suas placas dorsais.'},
+{q:'Qual é o nome do período mais antigo da Era Mesozoica?',opts:['Cretáceo','Jurássico','Triássico','Holoceno'],a:2,why:'O Triássico foi o primeiro período da Era Mesozoica.'},
+{q:'O Velociraptor real tinha aproximadamente qual comprimento?',opts:['2 metros','15 metros','30 metros','10 metros de altura'],a:0,why:'O Velociraptor era relativamente pequeno, com cerca de 2 m de comprimento.'},
+{q:'O que é um paleontólogo?',opts:['Um vulcanólogo','Um estudioso de fósseis','Um astronauta','Um meteorologista'],a:1,why:'Paleontólogos estudam a vida do passado a partir de seus vestígios.'},
+{q:'Há quantos milhões de anos ocorreu a extinção dos dinossauros não avianos?',opts:['66 milhões','6 mil','500 milhões','2 milhões'],a:0,why:'Essa extinção ocorreu há cerca de 66 milhões de anos.'}
+];
+function startQuiz(){quizIndex=0;quizCorrect=0;quizGameQuestion()}
+function quizGameQuestion(){if(quizIndex>=quiz.length){openGame('🏆 Quiz concluído!',`<p>Você acertou <strong>${quizCorrect}</strong> de ${quiz.length} perguntas!</p><p>${quizCorrect>=8?'Você é um verdadeiro especialista! 🦖':quizCorrect>=5?'Muito bem, explorador! 🌿':'Continue explorando para aprender ainda mais!'}</p><button class="primary" onclick="startQuiz()">JOGAR NOVAMENTE</button>`);finishGame(quizCorrect*3+5);return}
+let q=quiz[quizIndex];openGame('🧠 Quiz jurássico',`<p>Pergunta ${quizIndex+1} de ${quiz.length}</p><h3>${q.q}</h3><div>${q.opts.map((o,i)=>`<button class="answer" onclick="answerQuiz(${i})">${o}</button>`).join('')}</div><div id="feedback" class="result"></div>`)}
+function answerQuiz(i){const q=quiz[quizIndex];const btns=$('gameContent').querySelectorAll('.answer');btns.forEach(b=>b.disabled=true);if(i===q.a){quizCorrect++;$('feedback').textContent='✅ Correto! '+q.why;addXP(3)}else $('feedback').textContent='❌ A resposta era: '+q.opts[q.a]+'. '+q.why;const next=document.createElement('button');next.className='primary';next.textContent=quizIndex===quiz.length-1?'VER RESULTADO':'PRÓXIMA PERGUNTA →';next.onclick=()=>{quizIndex++;quizGameQuestion()};$('gameContent').appendChild(next)}
+function startMemory(){let icons=['🦖','🦕','🦏','🐊','🦴','🥚','🪶','🌋'];let deck=[...icons,...icons].sort(()=>Math.random()-.5);memFirst=null;memLock=false;memMatches=0;memMoves=0;openGame('🃏 Memória fóssil',`<p>Encontre todos os 8 pares. Tentativas: <strong id="memMoves">0</strong></p><div class="memory-grid">${deck.map((v,i)=>`<button class="memory-tile" data-icon="${v}" data-index="${i}" onclick="flipMemory(this)">❔</button>`).join('')}</div><p id="memFeedback">Encontre dois símbolos iguais!</p>`)}
+function flipMemory(el){if(memLock||el.classList.contains('found')||el.textContent!=='❔')return;el.textContent=el.dataset.icon;if(!memFirst){memFirst=el;return}memMoves++;$('memMoves').textContent=memMoves;if(memFirst.dataset.icon===el.dataset.icon){memFirst.classList.add('found');el.classList.add('found');memFirst=null;memMatches++;addXP(2);if(memMatches===8){$('memFeedback').textContent='🏆 Você encontrou todos os pares!';finishGame(Math.max(5,40-memMoves));celebrate()}else $('memFeedback').textContent='✨ Par encontrado!'}else{memLock=true;let first=memFirst;setTimeout(()=>{first.textContent='❔';el.textContent='❔';memFirst=null;memLock=false},800)}}
+function startEggs(){eggRounds=0;eggGame()}
+function eggGame(){let options=[{e:'🦖',name:'T. rex',text:'Você encontrou um dente fossilizado de um grande predador!'}, {e:'🦕',name:'Saurópode',text:'Um fragmento de osso de um gigante herbívoro!'}, {e:'🪶',name:'Pena fóssil',text:'Uma pista sobre a ligação entre dinossauros e aves!'}, {e:'🥚',name:'Ovo fóssil',text:'Um ovo fossilizado! Ele pode revelar detalhes sobre a reprodução.'},{e:'🦴',name:'Fóssil raro',text:'Um achado especial! Cientistas usam fósseis para reconstruir a vida antiga.'}];let chosen=options[Math.floor(Math.random()*options.length)];openGame('🦴 Caça aos fósseis',`<p>Ovo ${eggRounds+1} de 5. Escolha um ovo para escavar!</p><div>${[0,1,2].map((n)=>`<button class="egg" onclick="revealEgg(${n})">🥚</button>`).join('')}</div><div class="egg-result" id="eggResult"></div><button id="eggNext" class="primary" style="display:none" onclick="eggRounds++;if(eggRounds<5)eggGame();else{finishGame(20);openGame('🏆 Escavação concluída!', '<p>Você concluiu a expedição de fósseis!</p><button class=&quot;primary&quot; onclick=&quot;startEggs()&quot;>NOVA ESCAVAÇÃO</button>')}">PRÓXIMO OVO →</button>`);window.currentEgg=chosen;window.eggUsed=false}
+function revealEgg(n){if(window.eggUsed)return;window.eggUsed=true;document.querySelectorAll('.egg').forEach((b,i)=>b.textContent=i===n?window.currentEgg.e:'🥚');$('eggResult').textContent=window.currentEgg.text;addXP(3);$('eggNext').style.display='inline-block'}
+const riddles=[
+{q:'Tenho três chifres e uma gola óssea. Quem sou eu?',a:'Triceratops',e:'🦏'},
+{q:'Sou famoso pelas placas nas costas e pelos espinhos na cauda.',a:'Stegosaurus',e:'🦕'},
+{q:'Sou um grande predador com braços curtos e dentes robustos.',a:'Tyrannosaurus rex',e:'🦖'},
+{q:'Tenho um pescoço comprido e era um enorme herbívoro.',a:'Brachiosaurus',e:'🦕'},
+{q:'Sou pequeno, tinha penas e uma garra curva em cada pé.',a:'Velociraptor',e:'🦎'}
+];
+function startRiddle(){window.riddleIndex=Math.floor(Math.random()*riddles.length);let r=riddles[window.riddleIndex];openGame('❓ Quem sou eu?',`<div style="font-size:70px">🕵️‍♀️</div><h3>${r.q}</h3><input id="riddleAnswer" placeholder="Digite sua resposta..." style="padding:14px;border-radius:12px;width:min(100%,400px)"><br><button class="primary" style="margin-top:12px" onclick="checkRiddle()">RESPONDER</button><p id="riddleResult" class="result"></p><button class="answer" onclick="startRiddle()">OUTRA ADIVINHAÇÃO ↻</button>`)}
+function checkRiddle(){let r=riddles[window.riddleIndex],v=$('riddleAnswer').value.toLowerCase().replace(/[^a-z0-9]/g,'');let a=r.a.toLowerCase().replace(/[^a-z0-9]/g,'');if(v.includes(a)||a.includes(v)&&v.length>5){$('riddleResult').textContent='🎉 Acertou! '+r.a;addXP(10);finishGame(5)}else $('riddleResult').textContent='🤔 Ainda não! Dica: '+r.e+' Tente de novo.'}
+function startBlitz(){blitzScore=0;blitzEnd=Date.now()+30000;blitzQuestion();if(blitzTimer)clearInterval(blitzTimer);blitzTimer=setInterval(()=>{let left=Math.max(0,Math.ceil((blitzEnd-Date.now())/1000));if($('blitzTime'))$('blitzTime').textContent=left;if(left<=0){clearInterval(blitzTimer);openGame('⏱️ Tempo esgotado!',`<h3>Você acertou ${blitzScore} perguntas!</h3><p>Continue treinando para superar seu recorde.</p><button class="primary" onclick="startBlitz()">TENTAR DE NOVO</button>`);finishGame(blitzScore*3+5)},200)}
+function blitzQuestion(){let q=quiz[Math.floor(Math.random()*quiz.length)];openGame('⚡ Desafio relâmpago',`<p>Tempo restante: <strong id="blitzTime">30</strong> s</p><p>Acertos: <strong>${blitzScore}</strong></p><h3>${q.q}</h3>${q.opts.map((o,i)=>`<button class="answer" onclick="blitzAnswer(${i},${q.a})">${o}</button>`).join('')}`)}
+function blitzAnswer(i,a){if(i===a){blitzScore++;addXP(2);toast('⚡ Acertou!')}else toast('Quase! Tente a próxima.');if(Date.now()<blitzEnd)blitzQuestion()}
+function startRunner(){openGame('🏃 Fuga do T-Rex',`<p>Toque na tela ou aperte ESPAÇO para pular os obstáculos!</p><canvas id="dinoCanvas" width="600" height="220"></canvas><p>Pontuação: <strong id="runScore">0</strong></p><button class="primary" onclick="jumpDino()">PULAR! ⬆️</button><button class="answer" onclick="startRunner()">RECOMEÇAR ↻</button><p id="runStatus">Preparado? Comece a corrida!</p>`);initRunner()}
+let runner={y:160,vy:0,obs:[],score:0,frame:0,alive:false};
+function initRunner(){if(runnerFrame)cancelAnimationFrame(runnerFrame);runner={y:160,vy:0,obs:[],score:0,frame:0,alive:true};const c=$('dinoCanvas');c.onclick=jumpDino;runnerLoop()}
+function jumpDino(){if(runner.alive&&runner.y>=159)runner.vy=-12}
+function runnerLoop(){const c=$('dinoCanvas');if(!c||!runner.alive)return;const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#70b76c';ctx.fillRect(0,190,600,30);ctx.font='35px serif';ctx.fillText('🦖',40,runner.y+25);runner.vy+=.6;runner.y=Math.min(160,runner.y+runner.vy);if(runner.y===160)runner.vy=0;runner.frame++;if(runner.frame%80===0)runner.obs.push({x:610});ctx.font='27px serif';for(let o of runner.obs){o.x-=5;ctx.fillText('🌵',o.x,190);if(o.x>40&&o.x<85&&runner.y>130){runner.alive=false;$('runStatus').textContent='💥 Fim de jogo! Pontuação: '+runner.score;if(runner.score>0)finishGame(Math.min(30,runner.score));return}}runner.obs=runner.obs.filter(o=>o.x>-40);runner.score++;if($('runScore'))$('runScore').textContent=Math.floor(runner.score/5);runnerFrame=requestAnimationFrame(runnerLoop)}
+window.addEventListener('keydown',e=>{if(e.code==='Space'&&runner.alive&&$('playArea').classList.contains('active')){e.preventDefault();jumpDino()}});
+function showAchievements(){const a=[];if(xp>=10)a.push('🌱 Explorador iniciante — 10 XP');if(xp>=50)a.push('🦕 Aprendiz jurássico — 50 XP');if(xp>=100)a.push('🦖 Mestre dos dinossauros — 100 XP');if(discovered.size>=3)a.push('🔎 Paleontólogo curioso — descobriu 3 espécies');if(gamesDone>=3)a.push('🎮 Mestre dos jogos — concluiu 3 jogos');$('achievementList').innerHTML='<p>'+(a.length?a.join('<br>'):'Continue explorando para desbloquear suas conquistas!')+'</p>';toast('🏆 Conquistas atualizadas!')}
+function setupEggs(){$('eggShowcase').innerHTML=[0,1,2,3,4].map((n)=>`<button class="egg" onclick="showSurprise(${n},this)">🥚</button>`).join('')}
+function showSurprise(n,el){const prizes=['🦖 T. rex! Um dos predadores mais famosos.','🦕 Um gigante herbívoro!','🪶 Uma pena fóssil!','🌋 Uma curiosidade pré-histórica!','🦴 Um fóssil misterioso!'];el.textContent=prizes[n].split(' ')[0];$('eggShowcase').dataset.last=prizes[n];toast(prizes[n]);addXP(1)}
+setupEggs();
+</script>
+</body>
+</html>
