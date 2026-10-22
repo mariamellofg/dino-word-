@@ -2,406 +2,1648 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DinoWorld — O Mundo Perdido</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Floresta Encantada | Mundo Jurássico</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
 
-:root{--bg:#071a12;--green:#173d2b;--gold:#f5d58b;--cream:#fff3d6;--mint:#c5e5bd}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:20px}
-body{margin:0;background:var(--bg);color:var(--cream);font-family:Nunito,sans-serif;overflow-x:hidden}
-button,a{font:inherit}
-a{color:inherit;text-decoration:none}
-button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-nav{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;padding:20px 6%;background:#071a12e8;border-bottom:1px solid #f5d58b45}
-.logo{font-family:Cinzel,serif;font-size:23px;letter-spacing:2px;color:var(--gold);font-weight:800}
-.logo span{color:white}
-.navlinks{display:flex;flex-wrap:wrap;gap:16px}
-.navlinks a{font-size:12px;font-weight:800}
-.navlinks a:hover{color:var(--gold)}
-h1,h2,h3{font-family:Cinzel,serif}
-#home{min-height:95vh;position:relative;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:linear-gradient(180deg,#071a1260,#071a12a0 75%,#071a12),url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=85') center/cover}
-.hero{position:relative;z-index:3;padding:65px 7% 100px;max-width:850px}
-.eyebrow{color:var(--gold);letter-spacing:4px;text-transform:uppercase;font-size:11px;font-weight:800}
-.hero h1{font-size:clamp(46px,9vw,95px);line-height:1.05;margin:22px 0;text-shadow:0 5px 30px #000}
-.hero h1 span{display:block;color:var(--gold)}
-.hero p{font-size:16px;line-height:1.9;max-width:490px}
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.btn{display:inline-block;padding:14px 20px;border:1px solid var(--gold);border-radius:30px;background:transparent;color:var(--gold);font-weight:800;text-align:center}
-.btn.primary{background:var(--gold);color:#102719}
-.btn:hover{transform:translateY(-2px)}
-.hero-dino{position:absolute;z-index:2;right:-4%;bottom:8%;width:min(60%,690px);pointer-events:none;animation:floatDino 5s ease-in-out infinite}
-.hero-dino img{display:block;width:100%;height:auto;mix-blend-mode:multiply;object-fit:contain}
-@keyframes floatDino{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
-.firefly{position:absolute;width:4px;height:4px;background:#ffe8a0;border-radius:50%;box-shadow:0 0 15px 4px #ffe8a070;animation:rise linear infinite}
-@keyframes rise{from{transform:translateY(105vh);opacity:0}20%,80%{opacity:1}to{transform:translateY(-10vh);opacity:0}}
-.hero-bottom{position:relative;z-index:3;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:20px 6%;background:#071a12b8;border-top:1px solid #f5d58b50;font-size:10px;letter-spacing:2px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);background:#0c2418;border-bottom:1px solid #f5d58b35}
-.stat{text-align:center;padding:22px 5px;border-right:1px solid #ffffff12}
-.stat strong{display:block;font-family:Cinzel,serif;font-size:30px;color:var(--gold)}
-.stat small{font-size:9px;letter-spacing:1px;color:#c5d8c0}
-section.content{padding:75px 6%;scroll-margin-top:20px}
-.section-heading{text-align:center;margin-bottom:38px}
-.section-heading h2{font-size:clamp(29px,5vw,45px);margin:15px 0}
-.section-heading p{max-width:650px;margin:auto;color:#c5d4c1;line-height:1.9}
-.magic-divider{text-align:center;color:var(--gold);letter-spacing:8px;margin:20px}
-.dino-grid,.game-grid,.fact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:22px}
-.dino-card,.game,.fact,.story-box,.mission{background:linear-gradient(145deg,#1a402b,#0c2116);border:1px solid #f5d58b55;border-radius:15px;overflow:hidden}
-.dino-card{transition:transform .3s,border-color .3s}
-.dino-card:hover{transform:translateY(-6px);border-color:var(--gold)}
-.dino-image{width:100%;height:230px;display:block;object-fit:contain;background:#e9e7d9;padding:8px;color:#152b1d}
-.dino-info{padding:22px}
-.dino-type{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:800}
-.dino-info h3{font-size:22px;margin:12px 0}
-.dino-info p,.fact p,.game p{color:#cbd8c7;line-height:1.8;font-size:14px}
-.outline{width:100%;padding:13px;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:25px;font-weight:800;margin-top:10px}
-.outline:hover{background:var(--gold);color:#102719}
-.magical-banner{text-align:center;padding:70px 7%;background:linear-gradient(#071a12bd,#071a12e8),url('https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1600&q=85') center/cover;border-block:1px solid #f5d58b50}
-.magical-banner h2{color:var(--gold);font-size:clamp(30px,5vw,48px)}
-.magical-banner p{max-width:650px;margin:20px auto 30px;line-height:1.9}
-.game{padding:23px}
-.game h3{font-size:21px;color:var(--gold)}
-.game button{padding:11px 14px;margin:5px 3px 5px 0;border:1px solid var(--gold);border-radius:25px;background:var(--gold);color:#102719;font-weight:800}
-.game button:disabled{opacity:.5}
-.game input:not([type=checkbox]){width:100%;padding:13px;border:1px solid var(--gold);border-radius:10px;background:#071a12;color:white;margin:10px 0}
-.game-result{min-height:24px;color:var(--gold)!important;font-weight:800}
-#eggGrid,#memoryGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:15px 0}
-#digGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:15px 0}
-#eggGrid button,#memoryGrid button,#digGrid button{margin:0;padding:8px;min-height:48px;font-size:20px;border-radius:10px;background:#254b30;color:white}
-#memoryGrid button.matched{background:#527647}
-.story-box{padding:25px}
-.story-box h3{font-size:26px;color:var(--gold)}
-.story-box p{line-height:1.9;color:#e3e9d9}
-.story-choices{display:grid;gap:10px;margin:20px 0}
-.story-choices button{padding:15px;text-align:left;border:1px solid #f5d58b80;border-radius:12px;background:#173d2b;color:white}
-.story-choices button:hover{background:#31563a}
-.story-result{padding:14px;background:#071a12;border-radius:10px;line-height:1.8;margin:15px 0}
-.fact{padding:22px}
-.fact h3{color:var(--gold)}
-.mission{padding:25px}
-.mission-line{display:flex;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid #ffffff18}
-.mission-line input{width:20px;height:20px;accent-color:var(--gold);flex-shrink:0}
-.mission-line.done span{text-decoration:line-through;color:#90a78d}
-.progress{height:9px;background:#263e2b;border-radius:20px;overflow:hidden;margin:22px 0}
-#progressFill{height:100%;width:0;background:var(--gold);transition:width .3s}
-#certificate{padding:22px;margin-top:20px;text-align:center;border:2px dashed var(--gold);border-radius:12px;background:#173823}
-#toast{display:none;position:fixed;z-index:99;bottom:20px;left:50%;transform:translateX(-50%);width:max-content;max-width:90%;padding:14px 20px;border-radius:25px;background:var(--gold);color:#102719;font-weight:800;text-align:center}
-#mapGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:15px 0}
-#mapGrid button{min-height:65px;font-size:22px;border-radius:10px;background:#254b30;color:white}
-#mapGrid button.current{background:var(--gold);color:#102719}
-#mapGrid button.visited{background:#527647}
-#reactionTarget{width:100%;min-height:90px;font-size:20px;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
-#reactionTarget.ready{background:#d7f29b;color:#102719}
-#reactionTarget.waiting{background:#8b3939;color:white}
-footer{text-align:center;padding:40px 20px;background:#041008;color:#c5d4c1;line-height:2}
-@media(max-width:650px){
- nav{flex-direction:column}
- .navlinks{justify-content:center;gap:13px}
- .hero{padding:50px 6% 270px}
- .hero-dino{width:100%;right:-8%;bottom:40px}
- .hero p{font-size:15px}
- .stats{grid-template-columns:repeat(2,1fr)}
- section.content{padding:55px 5%}
- .hero-bottom{font-size:9px}
+:root {
+  --verde: #071b12;
+  --verde2: #102f20;
+  --verde3: #1b4630;
+  --dourado: #f8d58a;
+  --claro: #e1e9d9;
+  --texto: #c5d3c4;
 }
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--verde);
+  color: var(--claro);
+  font-family: 'Nunito', sans-serif;
+  overflow-x: hidden;
+}
+
+button, input { font: inherit; }
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:active { transform: scale(.97); }
+
+a { color: inherit; text-decoration: none; }
+
+#particulas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.particula {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--dourado);
+  box-shadow: 0 0 12px 3px #f8d58a66;
+  animation: flutuar linear infinite;
+  opacity: 0;
+}
+
+@keyframes flutuar {
+  0% { transform: translateY(30px) scale(.5); opacity: 0; }
+  20% { opacity: .8; }
+  80% { opacity: .6; }
+  100% { transform: translateY(-110vh) translateX(50px) scale(1.4); opacity: 0; }
+}
+
+header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 6%;
+}
+
+.logo {
+  color: var(--dourado);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 2px;
+}
+
+.menu {
+  display: flex;
+  gap: 22px;
+  font-size: 13px;
+  color: #e1e9d9;
+}
+
+.menu a:hover { color: var(--dourado); }
+
+.hero {
+  min-height: 850px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 100px 8% 80px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, #04130df2 0%, #071b12c9 45%, #071b1260 100%),
+    linear-gradient(0deg, var(--verde), transparent 35%),
+    url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=90') center/cover;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 75% 40%, #9ab87820, transparent 55%);
+  animation: brilho 6s ease-in-out infinite alternate;
+}
+
+@keyframes brilho {
+  from { opacity: .3; }
+  to { opacity: 1; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 690px;
+  animation: aparecer 1.2s ease both;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.selo {
+  display: inline-block;
+  border: 1px solid #f8d58a88;
+  color: var(--dourado);
+  padding: 9px 16px;
+  border-radius: 30px;
+  letter-spacing: 3px;
+  font-size: 11px;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+h1, h2, h3 { line-height: 1.2; }
+
+.hero h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(42px, 8vw, 88px);
+  margin: 0 0 20px;
+  color: #fff5d9;
+  text-shadow: 0 5px 30px #0008;
+}
+
+.hero h1 span { color: var(--dourado); }
+
+.hero p {
+  color: #d0d9cd;
+  font-size: clamp(17px, 2.5vw, 21px);
+  line-height: 1.9;
+  max-width: 570px;
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 32px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--dourado);
+  border-radius: 50px;
+  padding: 15px 25px;
+  background: var(--dourado);
+  color: #142719;
+  font-weight: 800;
+  font-size: 15px;
+  transition: .25s;
+  min-height: 52px;
+}
+
+.btn:hover {
+  box-shadow: 0 0 25px #f8d58a40;
+  transform: translateY(-2px);
+}
+
+.btn.secundario {
+  background: transparent;
+  color: var(--dourado);
+}
+
+.btn.largo { width: 100%; }
+
+.hero-detalhe {
+  position: absolute;
+  bottom: 38px;
+  right: 7%;
+  color: #f8d58a99;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 5px;
+  font-size: 12px;
+  writing-mode: vertical-rl;
+}
+
+.faixa {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: #0c2619;
+  border-top: 1px solid #ffffff0c;
+  border-bottom: 1px solid #ffffff0c;
+}
+
+.numero {
+  padding: 30px 10px;
+  text-align: center;
+  border-right: 1px solid #ffffff12;
+}
+
+.numero strong {
+  display: block;
+  color: var(--dourado);
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+}
+
+.numero span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #b7c7b6;
+}
+
+section {
+  padding: 85px 7%;
+  scroll-margin-top: 25px;
+}
+
+.section-topo {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 42px;
+}
+
+.mini-titulo {
+  color: var(--dourado);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.section-topo h2 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(30px, 5vw, 48px);
+  margin: 14px 0;
+  color: #fff1cf;
+}
+
+.section-topo p {
+  color: var(--texto);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.floresta-fundo {
+  background:
+    linear-gradient(#071b12ed, #071b12f5),
+    url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80') center/cover fixed;
+}
+
+.grade-dinos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.card-dino {
+  border: 1px solid #b7c58c38;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #173a28, #0b2116);
+  transition: transform .35s, border-color .35s, box-shadow .35s;
+}
+
+.card-dino:hover {
+  transform: translateY(-8px);
+  border-color: #f8d58a99;
+  box-shadow: 0 18px 40px #0004;
+}
+
+.dino-imagem {
+  height: 230px;
+  background:
+    radial-gradient(ellipse at center, #31573a, #102b1d 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.dino-imagem img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 15px;
+  filter: drop-shadow(0 12px 14px #0006);
+  transition: transform .5s;
+}
+
+.card-dino:hover .dino-imagem img {
+  transform: scale(1.08);
+}
+
+.dino-imagem::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 55px;
+  background: linear-gradient(transparent, #102b1d);
+  pointer-events: none;
+}
+
+.dino-conteudo { padding: 22px; }
+
+.dino-tipo {
+  color: var(--dourado);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.dino-conteudo h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 23px;
+  margin: 12px 0;
+}
+
+.dino-conteudo p {
+  color: var(--texto);
+  line-height: 1.8;
+  min-height: 80px;
+  font-size: 14px;
+}
+
+.info-extra {
+  display: none;
+  padding-top: 12px;
+  border-top: 1px solid #ffffff18;
+  color: #e0e8d8;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.info-extra.aberto { display: block; animation: aparecer .4s; }
+
+.botao-card {
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid #f8d58a99;
+  color: var(--dourado);
+  background: transparent;
+  border-radius: 30px;
+  padding: 13px;
+  font-weight: 800;
+}
+
+.botao-card:hover { background: #f8d58a14; }
+
+.painel {
+  max-width: 950px;
+  margin: auto;
+  background: linear-gradient(145deg, #153a27, #0b2116);
+  border: 1px solid #f8d58a40;
+  border-radius: 24px;
+  padding: clamp(24px, 5vw, 45px);
+  box-shadow: 0 20px 50px #0002;
+}
+
+.painel h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--dourado);
+  font-size: clamp(23px, 4vw, 34px);
+  margin-top: 0;
+}
+
+.painel p { color: var(--texto); line-height: 1.8; }
+
+.opcoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.opcao {
+  border: 1px solid #b7c58c55;
+  background: #071b1277;
+  color: var(--claro);
+  border-radius: 12px;
+  padding: 16px;
+  font-weight: 700;
+  text-align: left;
+  min-height: 55px;
+  transition: .2s;
+}
+
+.opcao:hover { border-color: var(--dourado); }
+
+.opcao.certa {
+  background: #28633c;
+  border-color: #91d7a1;
+}
+
+.opcao.errada {
+  background: #63302b;
+  border-color: #e49a8c;
+}
+
+.feedback {
+  min-height: 28px;
+  color: var(--dourado);
+  font-weight: 800;
+  line-height: 1.7;
+  margin: 15px 0;
+}
+
+.progresso {
+  height: 7px;
+  background: #ffffff18;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progresso div {
+  height: 100%;
+  background: var(--dourado);
+  width: 0;
+  transition: width .4s;
+}
+
+.historia-caixa {
+  max-width: 850px;
+  margin: auto;
+  min-height: 280px;
+  padding: clamp(24px, 5vw, 45px);
+  border-radius: 22px;
+  border: 1px solid #f8d58a55;
+  background:
+    linear-gradient(135deg, #173b28ed, #071b12f2),
+    url('https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=80') center/cover;
+}
+
+.capitulo {
+  color: var(--dourado);
+  letter-spacing: 3px;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.historia-caixa h3 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(25px, 4vw, 38px);
+  color: #fff1cf;
+}
+
+.historia-caixa p { line-height: 1.9; color: var(--texto); }
+
+#historia-opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.jogos-grade {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.jogo {
+  border: 1px solid #f8d58a40;
+  background: linear-gradient(145deg, #153725, #0b2116);
+  padding: 28px;
+  border-radius: 20px;
+  min-width: 0;
+}
+
+.jogo .icone {
+  font-size: 30px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.jogo h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--dourado);
+  font-size: 22px;
+  margin: 0 0 12px;
+}
+
+.jogo p { color: var(--texto); line-height: 1.8; }
+
+.resposta-linha {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.resposta-linha input {
+  flex: 1;
+  min-width: 140px;
+  border-radius: 12px;
+  border: 1px solid #f8d58a66;
+  background: #071b12;
+  color: white;
+  padding: 14px;
+  outline: none;
+}
+
+.resposta-linha input:focus { border-color: var(--dourado); }
+
+.grade-memoria {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.carta-memoria {
+  min-height: 78px;
+  border: 1px solid #f8d58a55;
+  background: #0a2417;
+  border-radius: 12px;
+  color: var(--dourado);
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.carta-memoria.revelada,
+.carta-memoria.combinada {
+  background: #234b31;
+  color: #fff1cf;
+}
+
+.carta-memoria.combinada { border-color: #a4d5a2; }
+
+.alvo-area {
+  height: 180px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at center, #244e32, #091b12);
+  border: 1px solid #ffffff18;
+  border-radius: 15px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+
+.ovo-alvo {
+  position: absolute;
+  font-size: 34px;
+  border: 0;
+  background: transparent;
+  padding: 6px;
+  animation: ovoPulsar 1s infinite alternate;
+}
+
+@keyframes ovoPulsar {
+  from { transform: scale(.9) rotate(-8deg); }
+  to { transform: scale(1.12) rotate(8deg); }
+}
+
+.campo-fossil {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.pedrinha {
+  min-height: 65px;
+  border: 1px solid #b3a27c66;
+  background: linear-gradient(145deg, #4a4938, #272e23);
+  border-radius: 12px;
+  color: #d6c8a0;
+  font-size: 25px;
+}
+
+.pedrinha.aberta { background: #254932; }
+
+.etapas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.etapa {
+  border: 1px solid #f8d58a40;
+  border-radius: 13px;
+  padding: 16px;
+  color: var(--texto);
+  text-align: center;
+  background: #071b1266;
+}
+
+.etapa strong {
+  display: block;
+  color: var(--dourado);
+  margin-bottom: 8px;
+}
+
+.revelado {
+  display: none;
+  color: var(--dourado);
+  line-height: 1.8;
+  margin-top: 15px;
+}
+
+.revelado.visivel { display: block; }
+
+.rodape {
+  text-align: center;
+  padding: 50px 20px;
+  background: #04130c;
+  border-top: 1px solid #ffffff12;
+}
+
+.rodape h3 {
+  font-family: 'Cinzel', serif;
+  color: var(--dourado);
+}
+
+.rodape p { color: var(--texto); font-size: 13px; }
+
+.animar-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s, transform .8s;
+}
+
+.animar-scroll.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.notificacao {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translate(-50%, 120px);
+  background: var(--dourado);
+  color: #142719;
+  padding: 14px 22px;
+  border-radius: 40px;
+  font-weight: 800;
+  z-index: 30;
+  text-align: center;
+  width: max-content;
+  max-width: 90%;
+  transition: transform .35s;
+  box-shadow: 0 8px 30px #0005;
+}
+
+.notificacao.mostrar { transform: translate(-50%, 0); }
+
+@media (max-width: 850px) {
+  .grade-dinos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero { min-height: 780px; }
+  .menu { gap: 12px; font-size: 11px; }
+}
+
+@media (max-width: 560px) {
+  header { padding: 18px 5%; }
+  .logo { font-size: 13px; letter-spacing: 1px; }
+  .menu { gap: 10px; }
+  .menu a { font-size: 10px; }
+  .hero {
+    min-height: 760px;
+    padding: 115px 7% 75px;
+    background-position: 60% center;
+  }
+  .hero h1 { font-size: 43px; }
+  .hero p { font-size: 16px; }
+  .hero-detalhe { display: none; }
+  .faixa { grid-template-columns: repeat(2, 1fr); }
+  .numero { padding: 22px 8px; }
+  .numero strong { font-size: 28px; }
+  .numero span { font-size: 9px; letter-spacing: 1px; }
+  section { padding: 65px 5%; }
+  .grade-dinos { grid-template-columns: 1fr; gap: 20px; }
+  .dino-imagem { height: 245px; }
+  .dino-conteudo p { min-height: 0; }
+  .jogos-grade { grid-template-columns: 1fr; }
+  .opcoes { grid-template-columns: 1fr; }
+  .grade-memoria { gap: 7px; }
+  .carta-memoria { min-height: 65px; font-size: 22px; }
+  .etapas { grid-template-columns: 1fr; }
+  .btn { padding: 14px 20px; }
+  .hero .botoes { align-items: stretch; flex-direction: column; max-width: 290px; }
+}
 </style>
 </head>
 
 <body>
-<section id="home">
-<div id="fireflies"></div>
-<nav>
-<a class="logo" href="#home">DINO<span>WORLD</span></a>
-<div class="navlinks">
-<a href="#especies">Dinossauros</a>
-<a href="#aventuras">Jogos</a>
-<a href="#historia">História</a>
-<a href="#descobertas">Mistérios</a>
-<a href="#missoes">Missões</a>
-</div>
-</nav>
-<div class="hero">
-<div class="eyebrow">✧ Uma aventura extraordinária ✧</div>
-<h1>Entre no<br><span>Mundo Perdido</span></h1>
-<p>Florestas gigantes, criaturas misteriosas, ovos escondidos e segredos de milhões de anos. Sua aventura começa aqui.</p>
-<div class="actions">
-<a class="btn primary" href="#especies">Explorar a floresta</a>
-<a class="btn" href="#aventuras">Começar aventura</a>
-</div>
-</div>
-<div class="hero-dino">
-<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus_rex_Reconstruction_by_Nobu_Tamura.jpg" alt="Tiranossauro Rex caminhando pela floresta">
-</div>
-<div class="hero-bottom">
-<span>✧ A floresta encantada</span>
-<span>Uma jornada pela pré-história</span>
-<span>Prepare-se para descobrir</span>
-</div>
+<div id="particulas"></div>
+
+<header>
+  <a class="logo" href="#inicio">✦ MUNDO JURÁSSICO</a>
+  <nav class="menu">
+    <a href="#dinos">Espécies</a>
+    <a href="#historia">História</a>
+    <a href="#jogos">Jogos</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="hero-content">
+    <span class="selo">Uma aventura pré-histórica</span>
+    <h1>A Floresta <span>Encantada</span></h1>
+    <p>Entre em um mundo perdido, descubra dinossauros incríveis, resolva mistérios antigos e encontre os segredos escondidos desta floresta mágica.</p>
+    <div class="botoes">
+      <a class="btn" href="#dinos">Explorar a floresta</a>
+      <a class="btn secundario" href="#historia">Começar aventura</a>
+    </div>
+  </div>
+  <div class="hero-detalhe">EXPLORE · DESCUBRA · APRENDA</div>
 </section>
 
-<div class="stats">
-<div class="stat"><strong id="score">0</strong><small>PONTOS MÁGICOS</small></div>
-<div class="stat"><strong id="eggsCount">0</strong><small>OVOS ENCONTRADOS</small></div>
-<div class="stat"><strong id="fossilCount">0</strong><small>FÓSSEIS DESCOBERTOS</small></div>
-<div class="stat"><strong id="badgeCount">0</strong><small>CONQUISTAS</small></div>
+<div class="faixa">
+  <div class="numero"><strong id="pontos">0</strong><span>PONTOS MÁGICOS</span></div>
+  <div class="numero"><strong id="ovos">0</strong><span>OVOS ENCONTRADOS</span></div>
+  <div class="numero"><strong id="fosseis">0</strong><span>FÓSSEIS DESCOBERTOS</span></div>
+  <div class="numero"><strong id="conquistas">0</strong><span>CONQUISTAS</span></div>
 </div>
 
-<section class="content" id="especies">
-<div class="section-heading">
-<div class="eyebrow">✧ O grande livro da floresta ✧</div>
-<h2>Conheça os gigantes</h2>
-<div class="magic-divider">✦ ❈ ✦</div>
-<p>Descubra criaturas que viveram há milhões de anos. Abra os registros e conheça seus segredos.</p>
-</div>
-<div class="dino-grid">
-<article class="dino-card">
-<img class="dino-image" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus_rex_Reconstruction_by_Nobu_Tamura.jpg" alt="Tiranossauro Rex">
-<div class="dino-info"><div class="dino-type">PREDADOR · CRETÁCEO</div><h3>Tiranossauro Rex</h3><p>Um grande predador, com cabeça robusta e dentes poderosos.</p><button class="outline" onclick="dinoInfo('rex')">Descobrir segredo</button></div>
-</article>
-<article class="dino-card">
-<img class="dino-image" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Triceratops_horridus.png" alt="Tricerátops">
-<div class="dino-info"><div class="dino-type">HERBÍVORO · CRETÁCEO</div><h3>Tricerátops</h3><p>Tinha três chifres e uma grande estrutura óssea atrás da cabeça.</p><button class="outline" onclick="dinoInfo('trike')">Descobrir segredo</button></div>
-</article>
-<article class="dino-card">
-<img class="dino-image" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus_stenops.jpg" alt="Estegossauro">
-<div class="dino-info"><div class="dino-type">HERBÍVORO · JURÁSSICO</div><h3>Estegossauro</h3><p>Famoso pelas placas nas costas e pelos espinhos na cauda.</p><button class="outline" onclick="dinoInfo('stego')">Descobrir segredo</button></div>
-</article>
-<article class="dino-card">
-<img class="dino-image" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Velociraptor_dinoguy2.jpg" alt="Velociraptor">
-<div class="dino-info"><div class="dino-type">PREDADOR · CRETÁCEO</div><h3>Velociraptor</h3><p>Era ágil, tinha penas e uma garra curva especial em cada pé.</p><button class="outline" onclick="dinoInfo('raptor')">Descobrir segredo</button></div>
-</article>
-<article class="dino-card">
-<img class="dino-image" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Brachiosaurus_DB.jpg" alt="Braquiossauro">
-<div class="dino-info"><div class="dino-type">HERBÍVORO · JURÁSSICO</div><h3>Braquiossauro</h3><p>Seu pescoço comprido ajudava a alcançar folhas no alto das árvores.</p><button class="outline" onclick="dinoInfo('brachio')">Descobrir segredo</button></div>
-</article>
-<article class="dino-card">
-<img class="dino-image" loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus_BW.jpg" alt="Espinossauro">
-<div class="dino-info"><div class="dino-type">CARNÍVORO · CRETÁCEO</div><h3>Espinossauro</h3><p>Tinha uma estrutura alta nas costas e adaptações ligadas à vida perto da água.</p><button class="outline" onclick="dinoInfo('spino')">Descobrir segredo</button></div>
-</article>
-</div>
+<section class="floresta-fundo" id="dinos">
+  <div class="section-topo animar-scroll">
+    <span class="mini-titulo">Arquivo secreto</span>
+    <h2>Habitantes do mundo perdido</h2>
+    <p>Conheça algumas das espécies mais fascinantes que já viveram na Terra. Toque em “Descobrir segredo” para aprender mais.</p>
+  </div>
+
+  <div class="grade-dinos">
+    <article class="card-dino animar-scroll">
+      <div class="dino-imagem">
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tyrannosaurus_rex_sue.jpg?width=800" alt="Esqueleto de Tiranossauro rex" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=800&q=80'">
+      </div>
+      <div class="dino-conteudo">
+        <span class="dino-tipo">Predador · Cretáceo</span>
+        <h3>Tiranossauro rex</h3>
+        <p>Um grande predador com dentes fortes, cabeça robusta e sentidos bem desenvolvidos.</p>
+        <div class="info-extra">Seu nome significa “rei dos lagartos tiranos”. Viveu há cerca de 68 a 66 milhões de anos, no final do Cretáceo. Seus braços eram pequenos, mas suas pernas eram fortes.</div>
+        <button class="botao-card" onclick="segredo(this)">Descobrir segredo</button>
+      </div>
+    </article>
+
+    <article class="card-dino animar-scroll">
+      <div class="dino-imagem">
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Stegosaurus_stenops_Sophie.jpg?width=800" alt="Esqueleto de Estegossauro">
+      </div>
+      <div class="dino-conteudo">
+        <span class="dino-tipo">Herbívoro · Jurássico</span>
+        <h3>Estegossauro</h3>
+        <p>Famoso pelas placas nas costas e pelos espinhos na ponta da cauda.</p>
+        <div class="info-extra">As placas do Estegossauro ficavam em duas fileiras nas costas. Os espinhos da cauda podiam ajudar na defesa contra predadores. Seu cérebro era pequeno em relação ao corpo.</div>
+        <button class="botao-card" onclick="segredo(this)">Descobrir segredo</button>
+      </div>
+    </article>
+
+    <article class="card-dino animar-scroll">
+      <div class="dino-imagem">
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Triceratops_BW.jpg?width=800" alt="Ilustração científica de Tricerátops">
+      </div>
+      <div class="dino-conteudo">
+        <span class="dino-tipo">Herbívoro · Cretáceo</span>
+        <h3>Tricerátops</h3>
+        <p>Tinha três chifres na cabeça e uma grande proteção óssea atrás dela.</p>
+        <div class="info-extra">O Tricerátops podia medir cerca de 9 metros. Seu bico ajudava a cortar plantas, e seus chifres talvez fossem usados para defesa e disputas entre indivíduos.</div>
+        <button class="botao-card" onclick="segredo(this)">Descobrir segredo</button>
+      </div>
+    </article>
+
+    <article class="card-dino animar-scroll">
+      <div class="dino-imagem">
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Brachiosaurus_BW.jpg?width=800" alt="Ilustração de Braquiossauro">
+      </div>
+      <div class="dino-conteudo">
+        <span class="dino-tipo">Herbívoro · Jurássico</span>
+        <h3>Braquiossauro</h3>
+        <p>Um gigante de pescoço comprido que alcançava folhas em árvores altas.</p>
+        <div class="info-extra">Suas patas dianteiras eram mais compridas que as traseiras, o que ajudava a manter o corpo inclinado para cima. Era um dinossauro herbívoro de grande porte.</div>
+        <button class="botao-card" onclick="segredo(this)">Descobrir segredo</button>
+      </div>
+    </article>
+
+    <article class="card-dino animar-scroll">
+      <div class="dino-imagem">
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Velociraptor_dinoguy2.jpg?width=800" alt="Reconstrução de Velociraptor">
+      </div>
+      <div class="dino-conteudo">
+        <span class="dino-tipo">Predador · Cretáceo</span>
+        <h3>Velociraptor</h3>
+        <p>Pequeno, ágil e com uma garra curva especial em cada pé.</p>
+        <div class="info-extra">O Velociraptor real era bem menor que os mostrados em muitos filmes. Tinha penas e media aproximadamente o tamanho de um peru grande.</div>
+        <button class="botao-card" onclick="segredo(this)">Descobrir segredo</button>
+      </div>
+    </article>
+
+    <article class="card-dino animar-scroll">
+      <div class="dino-imagem">
+        <img loading="lazy" src="https://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus_BW.jpg?width=800" alt="Ilustração de Espinossauro">
+      </div>
+      <div class="dino-conteudo">
+        <span class="dino-tipo">Carnívoro · Cretáceo</span>
+        <h3>Espinossauro</h3>
+        <p>Possuía uma estrutura alta nas costas e adaptações para viver perto da água.</p>
+        <div class="info-extra">O Espinossauro tinha focinho comprido e dentes cônicos, úteis para capturar peixes. É considerado um dos maiores dinossauros carnívoros conhecidos.</div>
+        <button class="botao-card" onclick="segredo(this)">Descobrir segredo</button>
+      </div>
+    </article>
+  </div>
 </section>
 
-<section class="magical-banner">
-<div class="eyebrow">✧ A floresta está chamando ✧</div>
-<h2>O que existe além das árvores?</h2>
-<p>Trilhas secretas, cavernas misteriosas e descobertas surpreendentes esperam por você.</p>
-<a class="btn primary" href="#aventuras">Revelar os mistérios</a>
+<section id="historia">
+  <div class="section-topo animar-scroll">
+    <span class="mini-titulo">Uma história interativa</span>
+    <h2>O segredo do vale perdido</h2>
+    <p>Você é uma jovem exploradora que encontrou um mapa misterioso. Suas escolhas vão decidir o caminho da aventura.</p>
+  </div>
+
+  <div class="historia-caixa animar-scroll">
+    <span class="capitulo" id="capitulo">Capítulo 01 · O mapa</span>
+    <h3 id="historia-titulo">A entrada escondida</h3>
+    <p id="historia-texto">Ao amanhecer, você encontra um mapa antigo perto de uma árvore gigante. Ele mostra duas trilhas e um símbolo brilhante. Qual caminho você escolhe?</p>
+    <div id="historia-opcoes">
+      <button class="btn" onclick="escolherHistoria(1)">Seguir as pegadas</button>
+      <button class="btn secundario" onclick="escolherHistoria(2)">Entrar na caverna</button>
+    </div>
+    <div class="feedback" id="historia-feedback"></div>
+  </div>
 </section>
 
-<section class="content" id="aventuras">
-<div class="section-heading">
-<div class="eyebrow">✧ Jogos encantados ✧</div>
-<h2>Hora da aventura!</h2>
-<div class="magic-divider">✦ ❈ ✦</div>
-<p>Complete desafios, encontre tesouros e teste seus conhecimentos sobre a pré-história.</p>
-</div>
+<section class="floresta-fundo" id="desafio">
+  <div class="section-topo animar-scroll">
+    <span class="mini-titulo">Teste seus conhecimentos</span>
+    <h2>Desafio dos exploradores</h2>
+    <p>Responda às perguntas e descubra quanto você aprendeu sobre a pré-história.</p>
+  </div>
 
-<div class="game-grid">
-<div class="game"><div class="eyebrow">DESAFIO 01</div><h3>Ovos escondidos</h3><p>Encontre os três ovos escondidos.</p><div id="eggGrid"></div><p class="game-result" id="eggResult"></p><button onclick="startEggs()">Nova busca</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 02</div><h3>Caça aos fósseis</h3><p>Investigue as pedras e encontre três fósseis.</p><div id="digGrid"></div><p class="game-result" id="digResult"></p><button onclick="startDig()">Nova escavação</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 03</div><h3>Quiz jurássico</h3><p id="quizQuestion"></p><div id="quizOptions"></div><p class="game-result" id="quizResult"></p><button onclick="nextQuiz()">Próxima pergunta</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 04</div><h3>Verdade ou mentira?</h3><p id="tfQuestion"></p><button onclick="answerTF(true)">Verdadeiro</button><button onclick="answerTF(false)">Falso</button><p class="game-result" id="tfResult"></p><button onclick="nextTF()">Outra afirmação</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 05</div><h3>Memória mágica</h3><p>Encontre os quatro pares iguais.</p><div id="memoryGrid"></div><p class="game-result" id="memoryResult"></p><button onclick="startMemory()">Jogar novamente</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 06</div><h3>Enigma secreto</h3><p id="riddleQuestion"></p><input id="riddleAnswer" placeholder="Quem sou eu?"><button onclick="checkRiddle()">Conferir</button><p class="game-result" id="riddleResult"></p><button onclick="nextRiddle()">Novo enigma</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 07</div><h3>Corrida na floresta</h3><p>Toque no botão o máximo que conseguir em 10 segundos!</p><p id="raceScore">Toques: 0</p><button id="raceButton" onclick="raceTap()" disabled>TOCAR!</button><button onclick="startRace()">Começar corrida</button><p class="game-result" id="raceResult"></p></div>
-<div class="game"><div class="eyebrow">DESAFIO 08</div><h3>Viagem no tempo</h3><p id="periodQuestion"></p><div id="periodOptions"></div><p class="game-result" id="periodResult"></p><button onclick="nextPeriod()">Viajar novamente</button></div>
-</div>
+  <div class="painel animar-scroll">
+    <div class="capitulo" id="quiz-numero">PERGUNTA 1 DE 8</div>
+    <div class="progresso"><div id="quiz-barra"></div></div>
+    <h3 id="quiz-pergunta">Qual destes dinossauros era herbívoro?</h3>
+    <div class="opcoes" id="quiz-opcoes"></div>
+    <div class="feedback" id="quiz-feedback"></div>
+    <button class="btn" id="quiz-proximo" onclick="proximaPergunta()" hidden>Próxima pergunta</button>
+  </div>
 </section>
 
-<section class="content" id="historia">
-<div class="section-heading"><div class="eyebrow">✧ Uma história interativa ✧</div><h2>O segredo da floresta</h2><div class="magic-divider">✦ ❈ ✦</div><p>Suas escolhas decidem o destino da expedição!</p></div>
-<div class="story-box">
-<div class="eyebrow" id="storyChapter">CAPÍTULO 01</div>
-<h3 id="storyTitle">O brilho entre as árvores</h3>
-<p id="storyText"></p>
-<div class="story-choices" id="storyChoices"></div>
-<div class="story-result" id="storyResult"></div>
-<button class="btn primary" onclick="restartStory()">Recomeçar história</button>
-</div>
+<section id="jogos">
+  <div class="section-topo animar-scroll">
+    <span class="mini-titulo">Laboratório de aventuras</span>
+    <h2>Jogos da floresta</h2>
+    <p>Procure ovos, escave fósseis, decifre enigmas e teste sua memória. Cada atividade ensina algo diferente!</p>
+  </div>
+
+  <div class="jogos-grade">
+    <article class="jogo animar-scroll">
+      <span class="icone">✦</span>
+      <h3>Caça aos ovos mágicos</h3>
+      <p>Encontre os ovos escondidos antes que o tempo acabe. Toque no ovo que aparecer na clareira!</p>
+      <p>Tempo: <strong id="tempo-ovo">15</strong> segundos · Encontrados: <strong id="placar-ovo">0</strong></p>
+      <button class="btn" onclick="iniciarCaca()">Começar caça</button>
+      <div class="alvo-area" id="area-ovo">
+        <span style="display:flex;height:100%;align-items:center;justify-content:center;color:#b7c7b6;font-size:13px;text-align:center;padding:12px">Ovos mágicos aparecerão aqui.</span>
+      </div>
+      <div class="feedback" id="feedback-ovo"></div>
+    </article>
+
+    <article class="jogo animar-scroll">
+      <span class="icone">⌕</span>
+      <h3>Escavação de fósseis</h3>
+      <p>Escolha as pedras para encontrar fósseis antigos. Você tem três tentativas por rodada.</p>
+      <p>Tentativas restantes: <strong id="tentativas">3</strong></p>
+      <div class="campo-fossil" id="campo-fossil"></div>
+      <button class="btn secundario" style="margin-top:15px" onclick="novaEscavacao()">Nova escavação</button>
+      <div class="feedback" id="feedback-fossil"></div>
+    </article>
+
+    <article class="jogo animar-scroll">
+      <span class="icone">◇</span>
+      <h3>Enigma da caverna</h3>
+      <p id="enigma-texto">Tenho três chifres e uma proteção atrás da cabeça. Quem sou eu?</p>
+      <div class="resposta-linha">
+        <input id="enigma-resposta" type="text" placeholder="Digite sua resposta" autocomplete="off">
+        <button class="btn" onclick="verificarEnigma()">Responder</button>
+      </div>
+      <div class="feedback" id="feedback-enigma"></div>
+      <button class="btn secundario" onclick="novoEnigma()">Novo enigma</button>
+    </article>
+
+    <article class="jogo animar-scroll">
+      <span class="icone">✧</span>
+      <h3>Memória jurássica</h3>
+      <p>Encontre os pares de símbolos iguais. É um treino de memória e concentração!</p>
+      <p>Pares encontrados: <strong id="pares">0</strong> de 6</p>
+      <div class="grade-memoria" id="memoria"></div>
+      <button class="btn secundario" style="margin-top:15px" onclick="iniciarMemoria()">Misturar cartas</button>
+      <div class="feedback" id="feedback-memoria"></div>
+    </article>
+
+    <article class="jogo animar-scroll">
+      <span class="icone">⌘</span>
+      <h3>Verdadeiro ou falso</h3>
+      <p id="vf-pergunta">Todos os dinossauros viveram ao mesmo tempo.</p>
+      <div class="botoes">
+        <button class="btn" onclick="responderVF(true)">Verdadeiro</button>
+        <button class="btn secundario" onclick="responderVF(false)">Falso</button>
+      </div>
+      <div class="feedback" id="vf-feedback"></div>
+      <button class="btn secundario" onclick="novaVF()">Próxima afirmação</button>
+    </article>
+
+    <article class="jogo animar-scroll">
+      <span class="icone">✧</span>
+      <h3>Diário de descobertas</h3>
+      <p>Abra o diário para descobrir curiosidades científicas sobre os dinossauros e os fósseis.</p>
+      <button class="btn" onclick="revelarCuriosidade()">Abrir diário</button>
+      <div class="revelado" id="curiosidade"></div>
+    </article>
+
+    <article class="jogo animar-scroll">
+      <span class="icone">⌖</span>
+      <h3>Quem sou eu?</h3>
+      <p id="quem-pergunta">Sou enorme, tenho pescoço comprido e me alimento de plantas. Quem sou?</p>
+      <div class="opcoes" id="quem-opcoes"></div>
+      <div class="feedback" id="quem-feedback"></div>
+    </article>
+
+    <article class="jogo animar-scroll">
+      <span class="icone">✦</span>
+      <h3>Missão do explorador</h3>
+      <p>Complete pequenas missões para ganhar pontos mágicos e desbloquear conquistas.</p>
+      <div class="etapas">
+        <div class="etapa"><strong>Missão 1</strong>Visitar as espécies</div>
+        <div class="etapa"><strong>Missão 2</strong>Responder ao quiz</div>
+        <div class="etapa"><strong>Missão 3</strong>Encontrar um fóssil</div>
+      </div>
+      <button class="btn" style="margin-top:20px" onclick="verificarMissoes()">Ver meu progresso</button>
+      <div class="feedback" id="feedback-missoes"></div>
+    </article>
+  </div>
 </section>
 
-<section class="content" id="novos-jogos">
-<div class="section-heading"><div class="eyebrow">✧ Novas aventuras ✧</div><h2>Desafios secretos</h2><div class="magic-divider">✦ ❈ ✦</div><p>Mais jogos para testar seus reflexos, atenção e conhecimento.</p></div>
-<div class="game-grid">
-<div class="game"><div class="eyebrow">DESAFIO 09</div><h3>Reflexo jurássico</h3><p>Espere o botão ficar verde e toque nele rapidamente!</p><button id="reactionTarget" onclick="reactionTap()">Começar teste</button><p class="game-result" id="reactionResult"></p><button onclick="startReaction()">Nova tentativa</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 10</div><h3>Caminho secreto</h3><p>Encontre a saída, andando apenas para casas vizinhas.</p><div id="mapGrid"></div><p class="game-result" id="mapResult"></p><button onclick="startMap()">Novo mapa</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 11</div><h3>Palavra embaralhada</h3><p>Descubra o nome escondido nas letras.</p><h2 id="scrambledWord" style="color:var(--gold);letter-spacing:5px"></h2><input id="wordAnswer" placeholder="Digite sua resposta"><button onclick="checkWord()">Conferir</button><p class="game-result" id="wordResult"></p><button onclick="newWord()">Outra palavra</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 12</div><h3>Quem deixou as pegadas?</h3><p id="footprintClue"></p><div id="footprintChoices"></div><p class="game-result" id="footprintResult"></p><button onclick="newFootprint()">Nova pista</button></div>
-<div class="game"><div class="eyebrow">DESAFIO 13</div><h3>Mochila do explorador</h3><p>Escolha dois itens úteis para sua expedição.</p>
-<label class="mission-line"><input type="checkbox" class="inventoryItem" value="mapa"><span>Mapa da floresta</span></label>
-<label class="mission-line"><input type="checkbox" class="inventoryItem" value="agua"><span>Garrafa de água</span></label>
-<label class="mission-line"><input type="checkbox" class="inventoryItem" value="travesseiro"><span>Travesseiro gigante</span></label>
-<label class="mission-line"><input type="checkbox" class="inventoryItem" value="lupa"><span>Lupa para fósseis</span></label>
-<label class="mission-line"><input type="checkbox" class="inventoryItem" value="lanterna"><span>Lanterna</span></label>
-<button onclick="checkInventory()">Preparar mochila</button><p class="game-result" id="inventoryResult"></p></div>
-<div class="game"><div class="eyebrow">DESAFIO 14</div><h3>Caixa misteriosa</h3><p>Escolha uma caixa e descubra seu tesouro.</p><div id="mysteryBoxes" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div><p class="game-result" id="mysteryResult"></p><button onclick="newMystery()">Trocar caixas</button></div>
-</div>
-</section>
+<section class="floresta-fundo" id="aprendizado">
+  <div class="section-topo animar-scroll">
+    <span class="mini-titulo">Pequenas descobertas</span>
+    <h2>Você sabia?</h2>
+    <p>A ciência ajuda a reconstruir um mundo que desapareceu há milhões de anos.</p>
+  </div>
 
-<section class="content" id="descobertas">
-<div class="section-heading"><div class="eyebrow">✧ Segredos da antiguidade ✧</div><h2>Mistérios da pré-história</h2><div class="magic-divider">✦ ❈ ✦</div><p>Descobertas científicas que mostram como era o mundo antigo.</p></div>
-<div class="fact-grid">
-<article class="fact"><h3>O grande desaparecimento</h3><p>Há cerca de 66 milhões de anos, um grande evento causou a extinção dos dinossauros não avianos. As aves são descendentes de dinossauros.</p></article>
-<article class="fact"><h3>Mensagens nas rochas</h3><p>Ossos, dentes, ovos e pegadas fossilizados ajudam a investigar a vida antiga.</p></article>
-<article class="fact"><h3>Gigantes e pequenos</h3><p>Os dinossauros tinham tamanhos muito diferentes. Nem todos eram gigantes.</p></article>
-<article class="fact"><h3>O poder das penas</h3><p>Várias espécies tinham penas. Elas não eram exclusivas das aves modernas.</p></article>
-<article class="fact"><h3>Uma Terra diferente</h3><p>Os continentes, o clima e a vegetação mudaram bastante ao longo das eras.</p></article>
-<article class="fact"><h3>Novos segredos</h3><p>Novos fósseis e pesquisas podem revelar espécies desconhecidas e mudar o que sabemos.</p></article>
-</div>
+  <div class="painel animar-scroll">
+    <h3>Como os cientistas descobrem o passado?</h3>
+    <p>Os fósseis são restos ou marcas de seres vivos preservados ao longo do tempo. Eles podem revelar como eram os animais, quais ambientes habitavam e como a vida mudou na Terra.</p>
+    <div class="etapas">
+      <div class="etapa"><strong>01 · Procurar</strong>Pesquisadores estudam rochas e locais onde fósseis podem estar preservados.</div>
+      <div class="etapa"><strong>02 · Investigar</strong>Os fósseis são cuidadosamente retirados, registrados e analisados.</div>
+      <div class="etapa"><strong>03 · Descobrir</strong>Comparações e evidências ajudam a entender a história da vida.</div>
+    </div>
+    <button class="btn" style="margin-top:25px" onclick="mostrarFato()">Revelar curiosidade científica</button>
+    <p class="feedback" id="fato-cientifico"></p>
+  </div>
 </section>
+</main>
 
-<section class="content" id="missoes">
-<div class="section-heading"><div class="eyebrow">✧ Diário do explorador ✧</div><h2>Suas missões</h2><div class="magic-divider">✦ ❈ ✦</div><p>Complete as cinco missões e conquiste seu certificado.</p></div>
-<div class="mission">
-<label class="mission-line"><input type="checkbox" class="missionCheck"><span>Conhecer três espécies de dinossauros</span></label>
-<label class="mission-line"><input type="checkbox" class="missionCheck"><span>Encontrar um ovo escondido</span></label>
-<label class="mission-line"><input type="checkbox" class="missionCheck"><span>Descobrir um fóssil</span></label>
-<label class="mission-line"><input type="checkbox" class="missionCheck"><span>Acertar uma pergunta do quiz</span></label>
-<label class="mission-line"><input type="checkbox" class="missionCheck"><span>Encontrar todos os pares da memória</span></label>
-<div class="progress"><div id="progressFill"></div></div>
-<p id="missionProgress">0 de 5 missões concluídas</p>
-<div id="certificate" hidden><h2>Explorador do Mundo Perdido</h2><p>Parabéns! Você concluiu todas as missões!</p><button class="btn primary" onclick="window.print()">Imprimir certificado</button></div>
-</div>
-</section>
+<footer class="rodape">
+  <h3>✦ A Floresta Encantada ✦</h3>
+  <p>Explore com curiosidade. Aprenda com a ciência. Descubra o mundo jurássico.</p>
+  <p>Uma aventura educativa sobre a vida pré-histórica.</p>
+  <a class="btn secundario" href="#inicio">Voltar ao início ↑</a>
+</footer>
 
-<footer><div class="logo">DINO<span>WORLD</span></div><p>Uma aventura inesquecível pela pré-história.</p><p>Projeto educativo sobre dinossauros e paleontologia.</p></footer>
-<div id="toast" role="status"></div>
+<div class="notificacao" id="notificacao"></div>
 
 <script>
-const $=id=>document.getElementById(id);
-let score=0,eggs=0,fossils=0,badges=new Set(),toastTimer;
-function points(n){score+=n;$('score').textContent=score}
-function toast(msg){$('toast').textContent=msg;$('toast').style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').style.display='none',2400)}
-for(let i=0;i<32;i++){const f=document.createElement('span');f.className='firefly';f.style.left=Math.random()*100+'%';f.style.animationDelay=-Math.random()*12+'s';f.style.animationDuration=7+Math.random()*9+'s';$('fireflies').appendChild(f)}
+let pontuacao = 0;
+let ovosEncontrados = 0;
+let fosseisEncontrados = 0;
+let conquistas = new Set();
+let quizConcluido = false;
+let visitouDinos = false;
+let tempoIntervalo = null;
+let ovoIntervalo = null;
+let tempoRestante = 15;
+let jogoOvoAtivo = false;
+let tentativasFossil = 3;
+let fossilAlvo = -1;
+let fossilRodadaTerminada = false;
+let memoriaPrimeira = null;
+let memoriaBloqueada = false;
+let memoriaPares = 0;
+let memoriaViradas = [];
+let perguntaVFAtual = 0;
+let enigmaAtual = 0;
+let curiosidadeAtual = 0;
+let quemAtual = 0;
 
-const dinos={
-rex:['Tiranossauro Rex','Era um grande predador do final do Cretáceo.'],
-trike:['Tricerátops','Tinha três chifres e uma grande gola óssea.'],
-stego:['Estegossauro','Tinha placas nas costas e espinhos na cauda.'],
-raptor:['Velociraptor','Era ágil, tinha penas e garras curvas.'],
-brachio:['Braquiossauro','Era um grande herbívoro de pescoço comprido.'],
-spino:['Espinossauro','Tinha uma estrutura alta nas costas e vivia perto da água.']
-};
-function dinoInfo(id){toast(dinos[id][0]+': '+dinos[id][1]);points(2);badges.add(id);updateBadges();if(badges.size>=3){document.querySelectorAll('.missionCheck')[0].checked=true;updateMissions()}}
-
-let eggTargets=new Set(),eggFound=0;
-function startEggs(){
-$('eggGrid').innerHTML='';eggTargets=new Set();while(eggTargets.size<3)eggTargets.add(Math.floor(Math.random()*12));eggFound=0;
-for(let i=0;i<12;i++){const b=document.createElement('button');b.textContent='✧';b.onclick=()=>{if(b.disabled)return;b.disabled=true;if(eggTargets.has(i)){b.textContent='🥚';eggFound++;eggs++;$('eggsCount').textContent=eggs;$('eggResult').textContent='Ovo encontrado! '+eggFound+'/3';points(10);if(eggFound===1){document.querySelectorAll('.missionCheck')[1].checked=true;updateMissions()}if(eggFound===3)toast('Todos os ovos encontrados!')}else{b.textContent='·';$('eggResult').textContent='Nada por aqui. Continue procurando!'}};$('eggGrid').appendChild(b)}
-$('eggResult').textContent='Encontre três ovos escondidos!';
+function atualizarPainel() {
+  document.getElementById('pontos').textContent = pontuacao;
+  document.getElementById('ovos').textContent = ovosEncontrados;
+  document.getElementById('fosseis').textContent = fosseisEncontrados;
+  document.getElementById('conquistas').textContent = conquistas.size;
 }
-startEggs();
 
-let digTargets=new Set(),digFound=0;
-function startDig(){
-$('digGrid').innerHTML='';digTargets=new Set();digFound=0;while(digTargets.size<3)digTargets.add(Math.floor(Math.random()*9));
-for(let i=0;i<9;i++){const b=document.createElement('button');b.textContent='✧';b.onclick=()=>{if(b.disabled)return;b.disabled=true;if(digTargets.has(i)){b.textContent='🦴';digFound++;fossils++;$('fossilCount').textContent=fossils;$('digResult').textContent='Fóssil encontrado! '+digFound+'/3';points(10);if(digFound===1){document.querySelectorAll('.missionCheck')[2].checked=true;updateMissions()}if(digFound===3)toast('Escavação concluída!')}else{b.textContent='·';$('digResult').textContent='Só terra e pedras. Tente outra!'}};$('digGrid').appendChild(b)}
-$('digResult').textContent='Escolha uma pedra para escavar!';
+function ganharPontos(valor, motivo) {
+  pontuacao += valor;
+  atualizarPainel();
+  if (motivo) notificar('+' + valor + ' pontos mágicos · ' + motivo);
 }
-startDig();
 
-const quiz=[
-{q:'Qual dinossauro tinha três chifres?',a:['Tricerátops','Estegossauro','Velociraptor'],c:0},
-{q:'O que os paleontólogos estudam?',a:['Fósseis','Planetas','Somente plantas atuais'],c:0},
-{q:'Qual destes era herbívoro?',a:['Tiranossauro Rex','Estegossauro','Velociraptor'],c:1},
-{q:'As aves descendem de qual grupo?',a:['Dinossauros terópodes','Tubarões','Anfíbios'],c:0},
-{q:'Em qual período viveu o Tiranossauro Rex?',a:['Triássico','Jurássico','Cretáceo'],c:2}
+function conquistar(nome, descricao) {
+  if (conquistas.has(nome)) return;
+  conquistas.add(nome);
+  atualizarPainel();
+  notificar('Conquista desbloqueada: ' + nome + '!');
+}
+
+let notificacaoTimer;
+function notificar(texto) {
+  const el = document.getElementById('notificacao');
+  el.textContent = texto;
+  el.classList.add('mostrar');
+  clearTimeout(notificacaoTimer);
+  notificacaoTimer = setTimeout(() => el.classList.remove('mostrar'), 2600);
+}
+
+function segredo(botao) {
+  const extra = botao.previousElementSibling;
+  const aberto = extra.classList.toggle('aberto');
+  botao.textContent = aberto ? 'Fechar segredo' : 'Descobrir segredo';
+  if (aberto) {
+    ganharPontos(3, 'Nova descoberta');
+    visitouDinos = true;
+    conquistar('Explorador curioso', 'Você descobriu uma espécie.');
+  }
+}
+
+const perguntasQuiz = [
+  {
+    p: 'Qual destes dinossauros era herbívoro?',
+    o: ['Tiranossauro rex', 'Estegossauro', 'Velociraptor', 'Espinossauro'],
+    c: 1,
+    e: 'O Estegossauro se alimentava de plantas.'
+  },
+  {
+    p: 'Em qual período viveu o Tiranossauro rex?',
+    o: ['Triássico', 'Jurássico inicial', 'Cretáceo', 'Era do gelo'],
+    c: 2,
+    e: 'O T. rex viveu no final do período Cretáceo.'
+  },
+  {
+    p: 'O que é um fóssil?',
+    o: ['Uma pedra sempre brilhante', 'Um resto ou vestígio de vida antiga', 'Um ovo atual', 'Um tipo de planta moderna'],
+    c: 1,
+    e: 'Fósseis preservam restos ou sinais de seres vivos do passado.'
+  },
+  {
+    p: 'Qual dinossauro tinha três chifres?',
+    o: ['Tricerátops', 'Braquiossauro', 'Estegossauro', 'Anquilossauro'],
+    c: 0,
+    e: 'O Tricerátops possuía três chifres na cabeça.'
+  },
+  {
+    p: 'O que comiam os dinossauros herbívoros?',
+    o: ['Somente carne', 'Peixes apenas', 'Plantas', 'Pedras'],
+    c: 2,
+    e: 'Herbívoros se alimentam de plantas.'
+  },
+  {
+    p: 'Os dinossauros e os seres humanos viveram juntos?',
+    o: ['Sim, todos juntos', 'Não, humanos surgiram muito depois', 'Só no Jurássico', 'Somente na Era do Gelo'],
+    c: 1,
+    e: 'Os dinossauros não aviários desapareceram milhões de anos antes dos seres humanos surgirem.'
+  },
+  {
+    p: 'Qual característica era marcante no Braquiossauro?',
+    o: ['Pescoço comprido', 'Asas enormes', 'Seis patas', 'Chifres na cabeça'],
+    c: 0,
+    e: 'O Braquiossauro tinha pescoço comprido e corpo muito grande.'
+  },
+  {
+    p: 'Qual grupo de animais é considerado descendente vivo dos dinossauros?',
+    o: ['Répteis marinhos', 'Aves', 'Sapos', 'Insetos'],
+    c: 1,
+    e: 'As aves são descendentes de dinossauros terópodes.'
+  }
 ];
-let qi=0,quizAnswered=false;
-function renderQuiz(){quizAnswered=false;const q=quiz[qi];$('quizQuestion').textContent=q.q;$('quizOptions').innerHTML='';q.a.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a;b.onclick=()=>{if(quizAnswered)return;quizAnswered=true;if(i===q.c){$('quizResult').textContent='Correto! +15 pontos';points(15);badges.add('quiz');updateBadges();document.querySelectorAll('.missionCheck')[3].checked=true;updateMissions()}else{$('quizResult').textContent='A resposta era: '+q.a[q.c]+'.'}};$('quizOptions').appendChild(b)});$('quizResult').textContent='Escolha sua resposta!'}
-function nextQuiz(){qi=(qi+1)%quiz.length;renderQuiz()}renderQuiz();
 
-const truths=[
-{q:'Todos os dinossauros eram carnívoros.',c:false,w:'Existiam espécies herbívoras e carnívoras.'},
-{q:'As aves descendem de dinossauros.',c:true,w:'As aves descendem de dinossauros terópodes.'},
-{q:'Todos os dinossauros viveram na mesma época.',c:false,w:'As espécies viveram em períodos diferentes.'},
-{q:'Pegadas preservadas podem ser fósseis.',c:true,w:'Pegadas preservadas são registros fósseis.'}
+let quizIndice = 0;
+let quizAcertos = 0;
+let quizRespondido = false;
+
+function renderizarQuiz() {
+  const q = perguntasQuiz[quizIndice];
+  document.getElementById('quiz-numero').textContent = 'PERGUNTA ' + (quizIndice + 1) + ' DE ' + perguntasQuiz.length;
+  document.getElementById('quiz-barra').style.width = (quizIndice / perguntasQuiz.length * 100) + '%';
+  document.getElementById('quiz-pergunta').textContent = q.p;
+  document.getElementById('quiz-feedback').textContent = '';
+  document.getElementById('quiz-proximo').hidden = true;
+  document.getElementById('quiz-proximo').textContent = quizIndice === perguntasQuiz.length - 1 ? 'Ver resultado' : 'Próxima pergunta';
+  quizRespondido = false;
+
+  const area = document.getElementById('quiz-opcoes');
+  area.innerHTML = '';
+  q.o.forEach((opcao, i) => {
+    const b = document.createElement('button');
+    b.className = 'opcao';
+    b.textContent = opcao;
+    b.onclick = () => responderQuiz(i, b);
+    area.appendChild(b);
+  });
+}
+
+function responderQuiz(indice, botao) {
+  if (quizRespondido) return;
+  quizRespondido = true;
+  const q = perguntasQuiz[quizIndice];
+  const botoes = document.querySelectorAll('#quiz-opcoes .opcao');
+  botoes.forEach((b, i) => {
+    b.disabled = true;
+    if (i === q.c) b.classList.add('certa');
+  });
+
+  if (indice === q.c) {
+    quizAcertos++;
+    ganharPontos(10, 'Resposta correta');
+    document.getElementById('quiz-feedback').textContent = 'Muito bem! ' + q.e;
+  } else {
+    botao.classList.add('errada');
+    document.getElementById('quiz-feedback').textContent = 'Quase! ' + q.e;
+  }
+
+  document.getElementById('quiz-proximo').hidden = false;
+}
+
+function proximaPergunta() {
+  if (quizIndice < perguntasQuiz.length - 1) {
+    quizIndice++;
+    renderizarQuiz();
+    document.getElementById('desafio').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    document.getElementById('quiz-barra').style.width = '100%';
+    document.getElementById('quiz-pergunta').textContent = 'Você acertou ' + quizAcertos + ' de ' + perguntasQuiz.length + ' perguntas!';
+    document.getElementById('quiz-opcoes').innerHTML = '';
+    document.getElementById('quiz-feedback').textContent = quizAcertos >= 6 ? 'Excelente! Você é um verdadeiro especialista da pré-história.' : 'Continue explorando e tente novamente para aprender ainda mais.';
+    document.getElementById('quiz-proximo').textContent = 'Jogar novamente';
+    document.getElementById('quiz-proximo').onclick = reiniciarQuiz;
+    document.getElementById('quiz-proximo').hidden = false;
+    if (!quizConcluido) {
+      quizConcluido = true;
+      ganharPontos(quizAcertos * 2, 'Bônus do quiz');
+      conquistar('Mestre do conhecimento', 'Você completou o desafio.');
+    }
+  }
+}
+
+function reiniciarQuiz() {
+  quizIndice = 0;
+  quizAcertos = 0;
+  quizConcluido = false;
+  document.getElementById('quiz-proximo').onclick = proximaPergunta;
+  renderizarQuiz();
+}
+
+const historias = [
+  {
+    cap: 'Capítulo 01 · O mapa',
+    titulo: 'A entrada escondida',
+    texto: 'Ao amanhecer, você encontra um mapa antigo perto de uma árvore gigante. Ele mostra duas trilhas e um símbolo brilhante. Qual caminho você escolhe?',
+    opcoes: ['Seguir as pegadas', 'Entrar na caverna'],
+    destino: [1, 2]
+  },
+  {
+    cap: 'Capítulo 02 · As pegadas',
+    titulo: 'O caminho dos gigantes',
+    texto: 'As pegadas levam até uma clareira. Você vê marcas enormes no chão e encontra uma pequena pedra com desenhos de dinossauros. O que fazer?',
+    opcoes: ['Examinar a pedra', 'Seguir o rio'],
+    destino: [3, 4]
+  },
+  {
+    cap: 'Capítulo 02 · A caverna',
+    titulo: 'O brilho misterioso',
+    texto: 'Dentro da caverna, pequenas luzes douradas iluminam as paredes. Há desenhos de ovos e fósseis. Uma passagem estreita parece continuar adiante.',
+    opcoes: ['Entrar na passagem', 'Voltar e procurar pegadas'],
+    destino: [5, 1]
+  },
+  {
+    cap: 'Capítulo 03 · A descoberta',
+    titulo: 'O primeiro fóssil',
+    texto: 'A pedra revela o desenho de um fóssil. Você percebe que está perto de um antigo local de descobertas. Registre a pista no diário!',
+    opcoes: ['Guardar a pista', 'Explorar a colina'],
+    destino: [6, 4]
+  },
+  {
+    cap: 'Capítulo 03 · O rio',
+    titulo: 'Um visitante gigante',
+    texto: 'Perto do rio, você vê um Braquiossauro se alimentando tranquilamente das folhas mais altas. Você observa em silêncio e aprende como ele vive.',
+    opcoes: ['Anotar a observação', 'Seguir até a cachoeira'],
+    destino: [6, 7]
+  },
+  {
+    cap: 'Capítulo 03 · A passagem',
+    titulo: 'O salão dos ovos',
+    texto: 'A passagem leva a um salão cheio de marcas antigas. No centro, um ovo fossilizado repousa sobre uma pedra. Você decide registrar a descoberta com cuidado.',
+    opcoes: ['Registrar a descoberta', 'Voltar ao mapa'],
+    destino: [8, 0]
+  },
+  {
+    cap: 'Capítulo 04 · O diário',
+    titulo: 'Uma pista importante',
+    texto: 'Seu diário agora contém pistas sobre o ambiente e os animais da região. Você entende que cada descoberta precisa de observação e evidências.',
+    opcoes: ['Investigar a última trilha', 'Recomeçar a exploração'],
+    destino: [9, 0]
+  },
+  {
+    cap: 'Capítulo 04 · A cachoeira',
+    titulo: 'A trilha escondida',
+    texto: 'Atrás da cachoeira existe uma passagem coberta de plantas. No chão, você encontra marcas de animais e uma pedra com um símbolo dourado.',
+    opcoes: ['Seguir o símbolo', 'Voltar ao rio'],
+    destino: [9, 4]
+  },
+  {
+    cap: 'Capítulo 05 · O ovo antigo',
+    titulo: 'A descoberta cuidadosa',
+    texto: 'Você registra o local do ovo sem tocá-lo. Cientistas precisam preservar evidências para que outros pesquisadores possam estudá-las.',
+    opcoes: ['Continuar a aventura', 'Recomeçar a história'],
+    destino: [9, 0]
+  },
+  {
+    cap: 'Capítulo final · A floresta',
+    titulo: 'O segredo revelado',
+    texto: 'Você descobre que o maior tesouro da floresta não é ouro: são as pistas que ajudam a compreender a vida antiga. Sua aventura termina, mas novas descobertas esperam por você!',
+    opcoes: ['Explorar novamente', 'Visitar os jogos'],
+    destino: [0, 10]
+  },
+  {
+    cap: 'Fim da aventura',
+    titulo: 'Parabéns, explorador!',
+    texto: 'Você percorreu a floresta e aprendeu que observar, pesquisar e proteger as descobertas é parte essencial da ciência.',
+    opcoes: ['Recomeçar a história', 'Ir para os jogos'],
+    destino: [0, 10]
+  }
 ];
-let ti=0,tfAnswered=false;
-function renderTF(){tfAnswered=false;$('tfQuestion').textContent=truths[ti].q;$('tfResult').textContent='O que você acha?'}
-function answerTF(v){if(tfAnswered)return;tfAnswered=true;const q=truths[ti];if(v===q.c){$('tfResult').textContent='Correto! '+q.w;points(10);badges.add('verdade');updateBadges()}else{$('tfResult').textContent='Não foi dessa vez. '+q.w}}
-function nextTF(){ti=(ti+1)%truths.length;renderTF()}renderTF();
 
-const memorySymbols=['🦖','🦴','🥚','🌿','🦖','🦴','🥚','🌿'];let firstCard=null,memoryLock=false,matches=0;
-function startMemory(){firstCard=null;memoryLock=false;matches=0;$('memoryGrid').innerHTML='';[...memorySymbols].sort(()=>Math.random()-.5).forEach(symbol=>{const b=document.createElement('button');b.textContent='?';b.dataset.symbol=symbol;b.onclick=()=>{if(memoryLock||b.classList.contains('matched')||b.textContent!=='?')return;b.textContent=symbol;if(!firstCard){firstCard=b;return}if(firstCard.dataset.symbol===b.dataset.symbol){firstCard.classList.add('matched');b.classList.add('matched');firstCard=null;matches++;if(matches===4){$('memoryResult').textContent='Todos os pares encontrados! +25 pontos';points(25);badges.add('memoria');updateBadges();document.querySelectorAll('.missionCheck')[4].checked=true;updateMissions()}}else{memoryLock=true;const old=firstCard;firstCard=null;setTimeout(()=>{old.textContent='?';b.textContent='?';memoryLock=false},700)}};$('memoryGrid').appendChild(b)});$('memoryResult').textContent='Encontre os quatro pares!'}
-startMemory();
+function renderizarHistoria(indice) {
+  const h = historias[indice];
+  document.getElementById('capitulo').textContent = h.cap;
+  document.getElementById('historia-titulo').textContent = h.titulo;
+  document.getElementById('historia-texto').textContent = h.texto;
+  document.getElementById('historia-feedback').textContent = '';
+  const area = document.getElementById('historia-opcoes');
+  area.innerHTML = '';
+  h.opcoes.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = i === 0 ? 'btn' : 'btn secundario';
+    b.textContent = op;
+    b.onclick = () => escolherHistoria(h.destino[i]);
+    area.appendChild(b);
+  });
+}
 
-const riddles=[
-{q:'Sou gigante, herbívoro e tenho pescoço comprido. Quem sou?',a:['braquiossauro','braquiosaurus']},
-{q:'Tenho três chifres e uma grande gola óssea. Quem sou?',a:['triceratops','tricerátops']},
-{q:'Sou um grande predador de dentes enormes. Quem sou?',a:['tiranossauro','tiranossauro rex','trex','t rex']},
-{q:'Tenho placas nas costas e espinhos na cauda. Quem sou?',a:['estegossauro','stegosaurus']}
-];let ri=0;
-function normalize(s){return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ')}
-function nextRiddle(){ri=(ri+1)%riddles.length;$('riddleQuestion').textContent=riddles[ri].q;$('riddleAnswer').value='';$('riddleResult').textContent=''}
-function checkRiddle(){if(riddles[ri].a.some(a=>normalize(a)===normalize($('riddleAnswer').value))){$('riddleResult').textContent='Enigma resolvido! +15 pontos';points(15);badges.add('enigma');updateBadges()}else{$('riddleResult').textContent='Tente novamente. Leia a pista com atenção!'}}
-$('riddleQuestion').textContent=riddles[0].q;
+function escolherHistoria(indice) {
+  if (indice === 10) {
+    document.getElementById('jogos').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  renderizarHistoria(indice);
+  ganharPontos(2, 'Passo da aventura');
+  document.getElementById('historia').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (indice === 9) conquistar('Guardião da floresta', 'Você concluiu a aventura.');
+}
 
-let raceActive=false,raceCount=0,raceTimeout;
-function startRace(){clearTimeout(raceTimeout);raceCount=0;raceActive=true;$('raceButton').disabled=false;$('raceScore').textContent='Toques: 0';$('raceResult').textContent='Valendo! Você tem 10 segundos!';raceTimeout=setTimeout(()=>{raceActive=false;$('raceButton').disabled=true;$('raceResult').textContent='Fim da corrida! Você marcou '+raceCount+' pontos.';points(raceCount);if(raceCount>=15){badges.add('velocidade');updateBadges()}},10000)}
-function raceTap(){if(!raceActive)return;raceCount++;$('raceScore').textContent='Toques: '+raceCount}
+const enigmas = [
+  { p: 'Tenho três chifres e uma proteção atrás da cabeça. Quem sou eu?', r: ['triceratops', 'tricerátops', 'triceratopo', 'tricerátopo'], d: 'O Tricerátops tinha três chifres e uma grande gola óssea.' },
+  { p: 'Sou um grande predador famoso por meus braços pequenos. Quem sou eu?', r: ['tiranossauro', 'tiranossauro rex', 'trex', 't-rex'], d: 'O Tiranossauro rex tinha uma cabeça robusta e braços curtos.' },
+  { p: 'Sou um herbívoro com placas nas costas e espinhos na cauda. Quem sou eu?', r: ['estegossauro'], d: 'O Estegossauro possuía placas nas costas e espinhos na cauda.' },
+  { p: 'Não sou uma pedra qualquer: guardo vestígios de seres vivos antigos. O que sou?', r: ['fossil', 'fóssil'], d: 'Um fóssil pode preservar restos ou marcas de seres vivos do passado.' },
+  { p: 'Sou uma gigante de pescoço comprido que alcançava folhas altas. Quem sou eu?', r: ['braquiossauro'], d: 'O Braquiossauro era um dinossauro herbívoro de pescoço comprido.' }
+];
 
-const periods=[
-{q:'Em qual período viveu o Tiranossauro Rex?',a:['Triássico','Jurássico','Cretáceo'],c:2},
-{q:'Qual período veio primeiro?',a:['Triássico','Jurássico','Cretáceo'],c:0},
-{q:'O Estegossauro viveu principalmente em qual período?',a:['Cretáceo','Jurássico','Triássico'],c:1},
-{q:'O Tricerátops viveu no final de qual período?',a:['Jurássico','Triássico','Cretáceo'],c:2}
-];let pi=0,periodAnswered=false;
-function renderPeriod(){periodAnswered=false;const q=periods[pi];$('periodQuestion').textContent=q.q;$('periodOptions').innerHTML='';q.a.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a;b.onclick=()=>{if(periodAnswered)return;periodAnswered=true;if(i===q.c){$('periodResult').textContent='Resposta certa! +10 pontos';points(10);badges.add('tempo');updateBadges()}else{$('periodResult').textContent='A resposta correta era '+q.a[q.c]+'.'}};$('periodOptions').appendChild(b)});$('periodResult').textContent='Escolha um período!'}
-function nextPeriod(){pi=(pi+1)%periods.length;renderPeriod()}renderPeriod();
+function verificarEnigma() {
+  const resposta = document.getElementById('enigma-resposta').value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const e = enigmas[enigmaAtual];
+  const corretas = e.r.map(x => x.normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+  const fb = document.getElementById('feedback-enigma');
 
-const chapters=[
-{title:'O brilho entre as árvores',text:'Você encontra uma luz dourada saindo de uma caverna. Ao lado dela, há pegadas enormes. O que você faz?',choices:[['Entrar cuidadosamente na caverna',1],['Seguir as pegadas pela floresta',2]]},
-{title:'A caverna dos cristais',text:'Dentro da caverna há cristais brilhantes e um ovo enorme. Um barulho vem do fundo.',choices:[['Observar o ovo sem tocar nele',3],['Sair em silêncio e procurar ajuda',4]]},
-{title:'As pegadas gigantes',text:'As pegadas levam até um rio. Você vê um dinossauro bebendo água do outro lado.',choices:[['Observar de longe e anotar',5],['Procurar um caminho seguro de volta',4]]},
-{title:'Uma descoberta extraordinária',text:'Você observa o ovo de longe e encontra marcas que podem ajudar os cientistas.',choices:[['Registrar tudo no diário',6],['Contar à equipe no acampamento',6]]},
-{title:'O caminho de volta',text:'Você retorna em segurança e encontra marcas fossilizadas numa pedra.',choices:[['Registrar o local para investigação',6],['Marcar o local no mapa',6]]},
-{title:'O observador da floresta',text:'Você observa o animal sem perturbá-lo e registra seu comportamento.',choices:[['Anotar suas descobertas',6],['Voltar ao acampamento',6]]},
-{title:'Fim da expedição',text:'Sua curiosidade e seu cuidado ajudaram a equipe a fazer uma grande descoberta. Uma nova aventura espera por você!',choices:[['Recomeçar a história',0]]}
-];let chapter=0,storyRewarded=false;
-function renderStory(){const c=chapters[chapter];$('storyChapter').textContent='CAPÍTULO '+String(chapter+1).padStart(2,'0');$('storyTitle').textContent=c.title;$('storyText').textContent=c.text;$('storyChoices').innerHTML='';$('storyResult').textContent=chapter===6?'Você concluiu esta aventura!':'Escolha o que fazer a seguir.';if(chapter===6&&!storyRewarded){storyRewarded=true;points(20);badges.add('historia');updateBadges()}c.choices.forEach(([label,next])=>{const b=document.createElement('button');b.textContent=label;b.onclick=()=>{if(next===0&&chapter===6)storyRewarded=false;chapter=next;renderStory()};$('storyChoices').appendChild(b)})}
-function restartStory(){chapter=0;storyRewarded=false;renderStory()}renderStory();
+  if (corretas.includes(resposta)) {
+    fb.textContent = 'Resposta correta! ' + e.d;
+    ganharPontos(8, 'Enigma resolvido');
+    document.getElementById('enigma-resposta').value = '';
+  } else {
+    fb.textContent = 'Ainda não! Leia a pista e tente novamente.';
+  }
+}
 
-let reactionTimer=null,reactionStart=0,reactionState='idle';
-function startReaction(){clearTimeout(reactionTimer);reactionState='waiting';$('reactionTarget').className='waiting';$('reactionTarget').textContent='Espere...';$('reactionResult').textContent='Não toque até ficar verde!';reactionTimer=setTimeout(()=>{if(reactionState!=='waiting')return;reactionState='ready';reactionStart=Date.now();$('reactionTarget').className='ready';$('reactionTarget').textContent='AGORA!'},1500+Math.random()*3500)}
-function reactionTap(){if(reactionState==='waiting'){clearTimeout(reactionTimer);reactionState='idle';$('reactionTarget').className='';$('reactionTarget').textContent='Tentar novamente';$('reactionResult').textContent='Cedo demais! Espere o verde.'}else if(reactionState==='ready'){const ms=Date.now()-reactionStart;reactionState='idle';$('reactionTarget').className='';$('reactionTarget').textContent='Teste concluído';$('reactionResult').textContent='Seu tempo: '+ms+' ms!';points(ms<350?15:5);$('reactionResult').textContent+=' +'+(ms<350?15:5)+' pontos.'}}
+function novoEnigma() {
+  enigmaAtual = (enigmaAtual + 1) % enigmas.length;
+  document.getElementById('enigma-texto').textContent = enigmas[enigmaAtual].p;
+  document.getElementById('enigma-resposta').value = '';
+  document.getElementById('feedback-enigma').textContent = '';
+}
 
-let mapPosition=0,mapGoal=8,mapVisited=new Set();
-function startMap(){mapPosition=0;mapVisited=new Set([0]);renderMap();$('mapResult').textContent='Comece na entrada e chegue até a bandeira!'}
-function renderMap(){$('mapGrid').innerHTML='';for(let i=0;i<9;i++){const b=document.createElement('button');b.textContent=i===mapPosition?'🧭':i===mapGoal?'🏁':mapVisited.has(i)?'🌿':'?';if(i===mapPosition)b.classList.add('current');else if(mapVisited.has(i))b.classList.add('visited');b.onclick=()=>{if(Math.abs(Math.floor(i/3)-Math.floor(mapPosition/3))+Math.abs(i%3-mapPosition%3)!==1){$('mapResult').textContent='Você só pode andar para uma casa vizinha!';return}if(mapVisited.has(i)&&i!==mapGoal){$('mapResult').textContent='Você já passou por aqui. Tente outro caminho!';return}mapPosition=i;mapVisited.add(i);if(i===mapGoal){$('mapResult').textContent='Você encontrou a saída! +20 pontos.';points(20);badges.add('mapa');updateBadges()}else{$('mapResult').textContent='Continue até a bandeira!'}renderMap()};$('mapGrid').appendChild(b)}}
-startMap();
+function novaEscavacao() {
+  tentativasFossil = 3;
+  fossilAlvo = Math.floor(Math.random() * 9);
+  fossilRodadaTerminada = false;
+  document.getElementById('tentativas').textContent = tentativasFossil;
+  document.getElementById('feedback-fossil').textContent = 'Escolha uma pedra para começar a escavação.';
+  const campo = document.getElementById('campo-fossil');
+  campo.innerHTML = '';
 
-const words=[{word:'REX',scramble:'XER'},{word:'OVO',scramble:'VOO'},{word:'TRIKE',scramble:'KETRI'},{word:'FOSSIL',scramble:'SIFLOS'},{word:'RAPTOR',scramble:'PROTAR'},{word:'DINO',scramble:'NODI'}];let wordIndex=0,wordSolved=false;
-function newWord(){wordIndex=(wordIndex+1)%words.length;wordSolved=false;$('scrambledWord').textContent=words[wordIndex].scramble.split('').join(' ');$('wordAnswer').value='';$('wordResult').textContent='Descubra a palavra!'}
-function checkWord(){if(wordSolved)return;if(normalize($('wordAnswer').value).toUpperCase()===words[wordIndex].word){wordSolved=true;$('wordResult').textContent='Acertou! +10 pontos.';points(10)}else{$('wordResult').textContent='Ainda não! Tente outra combinação.'}}
-$('scrambledWord').textContent=words[0].scramble.split('').join(' ');
+  for (let i = 0; i < 9; i++) {
+    const b = document.createElement('button');
+    b.className = 'pedrinha';
+    b.textContent = '◆';
+    b.setAttribute('aria-label', 'Examinar pedra ' + (i + 1));
+    b.onclick = () => escavar(i, b);
+    campo.appendChild(b);
+  }
+}
 
-const footprintData=[
-{q:'Tenho três chifres e uma gola óssea. Quem sou?',a:['Tricerátops','Estegossauro','Braquiossauro'],c:0},
-{q:'Tenho placas nas costas e espinhos na cauda. Quem sou?',a:['Tiranossauro','Estegossauro','Velociraptor'],c:1},
-{q:'Tenho um pescoço muito comprido. Quem sou?',a:['Braquiossauro','Tricerátops','Velociraptor'],c:0},
-{q:'Sou um grande predador de dentes poderosos. Quem sou?',a:['Estegossauro','Tiranossauro Rex','Braquiossauro'],c:1}
-];let footprintIndex=0,footprintAnswered=false;
-function renderFootprint(){footprintAnswered=false;const q=footprintData[footprintIndex];$('footprintClue').textContent=q.q;$('footprintChoices').innerHTML='';q.a.forEach((a,i)=>{const b=document.createElement('button');b.textContent=a;b.onclick=()=>{if(footprintAnswered)return;footprintAnswered=true;if(i===q.c){$('footprintResult').textContent='Pegadas identificadas! +10 pontos.';points(10)}else{$('footprintResult').textContent='A resposta era '+q.a[q.c]+'.'}};$('footprintChoices').appendChild(b)});$('footprintResult').textContent='Investigue as pistas!'}
-function newFootprint(){footprintIndex=(footprintIndex+1)%footprintData.length;renderFootprint()}renderFootprint();
+function escavar(i, botao) {
+  if (fossilRodadaTerminada || botao.classList.contains('aberta')) return;
+  botao.classList.add('aberta');
 
-function checkInventory(){const selected=[...document.querySelectorAll('.inventoryItem:checked')];if(selected.length!==2){$('inventoryResult').textContent='Escolha exatamente dois itens!';return}const good=selected.filter(x=>['mapa','agua','lupa','lanterna'].includes(x.value)).length;if(good===2){$('inventoryResult').textContent='Excelente escolha! +10 pontos.';points(10)}else{$('inventoryResult').textContent='Escolha itens mais úteis para a expedição!'}}
+  if (i === fossilAlvo) {
+    botao.textContent = '✧';
+    fossilRodadaTerminada = true;
+    fosseisEncontrados++;
+    atualizarPainel();
+    ganharPontos(15, 'Fóssil descoberto');
+    conquistar('Paleontólogo iniciante', 'Você encontrou um fóssil.');
+    document.getElementById('feedback-fossil').textContent = 'Você encontrou um fóssil! Na vida real, fósseis são registrados e preservados para estudo.';
+    document.querySelectorAll('.pedrinha').forEach(b => b.disabled = true);
+  } else {
+    botao.textContent = '·';
+    tentativasFossil--;
+    document.getElementById('tentativas').textContent = tentativasFossil;
+    if (tentativasFossil <= 0) {
+      fossilRodadaTerminada = true;
+      document.getElementById('feedback-fossil').textContent = 'A escavação terminou. Comece uma nova rodada e tente outra vez!';
+      document.querySelectorAll('.pedrinha').forEach(b => b.disabled = true);
+    } else {
+      document.getElementById('feedback-fossil').textContent = 'Ainda não é essa pedra. Continue procurando!';
+    }
+  }
+}
 
-let mysteryOpened=false;
-function newMystery(){mysteryOpened=false;$('mysteryBoxes').innerHTML='';$('mysteryResult').textContent='Escolha uma caixa!';const prizes=['+5 pontos','+10 pontos','+20 pontos','Uma pedra comum','Um fóssil raro','Um ovo dourado'];const shuffled=prizes.sort(()=>Math.random()-.5);shuffled.slice(0,3).forEach(prize=>{const b=document.createElement('button');b.textContent='✧';b.style.minHeight='70px';b.style.fontSize='28px';b.onclick=()=>{if(mysteryOpened)return;mysteryOpened=true;b.textContent='✦';if(prize.includes('pontos')){const n=Number(prize.match(/\d+/)[0]);points(n);$('mysteryResult').textContent='Você ganhou '+prize+'!'}else if(prize.includes('fóssil')){fossils++;$('fossilCount').textContent=fossils;points(15);$('mysteryResult').textContent='Você encontrou um fóssil raro! +15 pontos.'}else if(prize.includes('ovo')){eggs++;$('eggsCount').textContent=eggs;points(15);$('mysteryResult').textContent='Um ovo dourado! +15 pontos.'}else{$('mysteryResult').textContent='Uma pedra comum. Tente outra rodada!'}};$('mysteryBoxes').appendChild(b)})}
-newMystery();
+function iniciarCaca() {
+  clearInterval(tempoIntervalo);
+  clearInterval(ovoIntervalo);
+  jogoOvoAtivo = true;
+  tempoRestante = 15;
+  const pontosAntes = ovosEncontrados;
+  document.getElementById('tempo-ovo').textContent = tempoRestante;
+  document.getElementById('placar-ovo').textContent = '0';
+  document.getElementById('feedback-ovo').textContent = 'A caça começou! Toque nos ovos que aparecerem.';
+  const area = document.getElementById('area-ovo');
+  area.innerHTML = '';
+  aparecerOvo();
 
-function updateBadges(){$('badgeCount').textContent=badges.size}
-function updateMissions(){const checks=[...document.querySelectorAll('.missionCheck')];const done=checks.filter(c=>c.checked).length;checks.forEach(c=>c.parentElement.classList.toggle('done',c.checked));$('progressFill').style.width=done/checks.length*100+'%';$('missionProgress').textContent=done+' de '+checks.length+' missões concluídas';$('certificate').hidden=done!==checks.length;if(done===checks.length){badges.add('explorador');updateBadges()}}
-document.querySelectorAll('.missionCheck').forEach(c=>c.addEventListener('change',updateMissions));
-updateMissions();
+  ovoIntervalo = setInterval(() => {
+    if (jogoOvoAtivo) aparecerOvo();
+  }, 850);
+
+  tempoIntervalo = setInterval(() => {
+    tempoRestante--;
+    document.getElementById('tempo-ovo').textContent = tempoRestante;
+    if (tempoRestante <= 0) {
+      clearInterval(tempoIntervalo);
+      clearInterval(ovoIntervalo);
+      jogoOvoAtivo = false;
+      document.querySelectorAll('.ovo-alvo').forEach(e => e.remove());
+      document.getElementById('feedback-ovo').textContent = 'Tempo encerrado! Você encontrou ' + (ovosEncontrados - pontosAntes) + ' ovo(s) nesta rodada.';
+      if (ovosEncontrados - pontosAntes >= 5) conquistar('Caçador de ovos', 'Você encontrou cinco ovos ou mais em uma rodada.');
+    }
+  }, 1000);
+}
+
+function aparecerOvo() {
+  if (!jogoOvoAtivo) return;
+  const area = document.getElementById('area-ovo');
+  let alvo = area.querySelector('.ovo-alvo');
+  if (alvo) alvo.remove();
+
+  const ovo = document.createElement('button');
+  ovo.className = 'ovo-alvo';
+  ovo.textContent = '🥚';
+  ovo.setAttribute('aria-label', 'Encontrar ovo mágico');
+  ovo.style.left = (Math.random() * 75 + 3) + '%';
+  ovo.style.top = (Math.random() * 65 + 5) + '%';
+  ovo.onclick = () => {
+    if (!jogoOvoAtivo) return;
+    ovosEncontrados++;
+    document.getElementById('placar-ovo').textContent = Number(document.getElementById('placar-ovo').textContent) + 1;
+    ganharPontos(2, 'Ovo encontrado');
+    ovo.remove();
+  };
+  area.appendChild(ovo);
+}
+
+const simbolosMemoria = ['🦕', '🦖', '🥚', '🦴', '🌿', '🐾'];
+
+function iniciarMemoria() {
+  const itens = [...simbolosMemoria, ...simbolosMemoria].sort(() => Math.random() - .5);
+  const area = document.getElementById('memoria');
+  area.innerHTML = '';
+  memoriaPrimeira = null;
+  memoriaBloqueada = false;
+  memoriaPares = 0;
+  memoriaViradas = [];
+  document.getElementById('pares').textContent = '0';
+  document.getElementById('feedback-memoria').textContent = 'Encontre todos os pares!';
+
+  itens.forEach((simbolo, i) => {
+    const b = document.createElement('button');
+    b.className = 'carta-memoria';
+    b.textContent = '?';
+    b.dataset.simbolo = simbolo;
+    b.dataset.indice = i;
+    b.setAttribute('aria-label', 'Carta escondida');
+    b.onclick = () => virarCarta(b);
+    area.appendChild(b);
+  });
+}
+
+function virarCarta(carta) {
+  if (memoriaBloqueada || carta.classList.contains('combinada') || carta.classList.contains('revelada')) return;
+  carta.textContent = carta.dataset.simbolo;
+  carta.classList.add('revelada');
+  memoriaViradas.push(carta);
+
+  if (memoriaViradas.length === 2) {
+    const [a, b] = memoriaViradas;
+    if (a.dataset.simbolo === b.dataset.simbolo) {
+      a.classList.add('combinada');
+      b.classList.add('combinada');
+      a.classList.remove('revelada');
+      b.classList.remove('revelada');
+      memoriaPares++;
+      document.getElementById('pares').textContent = memoriaPares;
+      ganharPontos(4, 'Par encontrado');
+      memoriaViradas = [];
+      if (memoriaPares === simbolosMemoria.length) {
+        document.getElementById('feedback-memoria').textContent = 'Você encontrou todos os pares! Excelente memória.';
+        conquistar('Memória jurássica', 'Você combinou todos os pares.');
+      }
+    } else {
+      memoriaBloqueada = true;
+      setTimeout(() => {
+        a.textContent = '?';
+        b.textContent = '?';
+        a.classList.remove('revelada');
+        b.classList.remove('revelada');
+        memoriaViradas = [];
+        memoriaBloqueada = false;
+      }, 850);
+    }
+  }
+}
+
+const perguntasVF = [
+  { p: 'Todos os dinossauros viveram ao mesmo tempo.', r: false, e: 'Falso! Diferentes espécies viveram em épocas distintas ao longo de milhões de anos.' },
+  { p: 'As aves são descendentes de dinossauros.', r: true, e: 'Verdadeiro! As aves descendem de dinossauros terópodes.' },
+  { p: 'Todos os dinossauros comiam carne.', r: false, e: 'Falso! Muitos dinossauros eram herbívoros.' },
+  { p: 'Fósseis podem ajudar a estudar o passado.', r: true, e: 'Verdadeiro! Fósseis são evidências importantes da vida antiga.' },
+  { p: 'O Tiranossauro rex viveu na mesma época que os primeiros seres humanos.', r: false, e: 'Falso! O T. rex viveu milhões de anos antes dos seres humanos.' },
+  { p: 'Alguns dinossauros tinham penas.', r: true, e: 'Verdadeiro! Há evidências fósseis de penas em várias espécies de dinossauros.' }
+];
+
+function responderVF(resposta) {
+  const q = perguntasVF[perguntaVFAtual];
+  const fb = document.getElementById('vf-feedback');
+  if (resposta === q.r) {
+    fb.textContent = 'Acertou! ' + q.e;
+    ganharPontos(5, 'Resposta correta');
+  } else {
+    fb.textContent = 'Não foi dessa vez. ' + q.e;
+  }
+}
+
+function novaVF() {
+  perguntaVFAtual = (perguntaVFAtual + 1) % perguntasVF.length;
+  document.getElementById('vf-pergunta').textContent = perguntasVF[perguntaVFAtual].p;
+  document.getElementById('vf-feedback').textContent = '';
+}
+
+const curiosidades = [
+  'As aves modernas fazem parte da linhagem dos dinossauros. Por isso, de certa forma, dinossauros ainda fazem parte do nosso mundo!',
+  'O nome “fóssil” é usado para restos ou vestígios de organismos antigos preservados naturalmente.',
+  'Nem todos os dinossauros eram gigantes. Algumas espécies tinham tamanho semelhante ao de uma galinha.',
+  'O Estegossauro viveu muito antes do Tiranossauro rex. Eles não foram vizinhos na história da Terra.',
+  'A paleontologia estuda fósseis e ajuda a reconstruir a história da vida no planeta.',
+  'O Tricerátops possuía um bico que ajudava a cortar plantas e uma grande gola óssea atrás do crânio.'
+];
+
+function revelarCuriosidade() {
+  const area = document.getElementById('curiosidade');
+  area.classList.add('visivel');
+  area.textContent = curiosidades[curiosidadeAtual];
+  curiosidadeAtual = (curiosidadeAtual + 1) % curiosidades.length;
+  ganharPontos(2, 'Curiosidade descoberta');
+}
+
+const quemSou = [
+  { p: 'Sou enorme, tenho pescoço comprido e me alimento de plantas. Quem sou?', o: ['Braquiossauro', 'Velociraptor', 'Tiranossauro'], c: 0 },
+  { p: 'Tenho três chifres e uma gola óssea. Quem sou?', o: ['Estegossauro', 'Tricerátops', 'Espinossauro'], c: 1 },
+  { p: 'Sou um predador famoso por meus braços curtos. Quem sou?', o: ['Braquiossauro', 'Tricerátops', 'Tiranossauro rex'], c: 2 },
+  { p: 'Tenho placas nas costas e espinhos na cauda. Quem sou?', o: ['Estegossauro', 'Velociraptor', 'Tricerátops'], c: 0 },
+  { p: 'Sou um pequeno dinossauro predador que tinha penas. Quem sou?', o: ['Braquiossauro', 'Velociraptor', 'Estegossauro'], c: 1 }
+];
+
+function renderizarQuem() {
+  const q = quemSou[quemAtual];
+  document.getElementById('quem-pergunta').textContent = q.p;
+  document.getElementById('quem-feedback').textContent = '';
+  const area = document.getElementById('quem-opcoes');
+  area.innerHTML = '';
+  q.o.forEach((op, i) => {
+    const b = document.createElement('button');
+    b.className = 'opcao';
+    b.textContent = op;
+    b.onclick = () => {
+      if (b.dataset.respondido) return;
+      b.dataset.respondido = 'sim';
+      if (i === q.c) {
+        b.classList.add('certa');
+        document.getElementById('quem-feedback').textContent = 'Muito bem! Você descobriu quem era.';
+        ganharPontos(5, 'Mistério resolvido');
+        conquistar('Detetive dos dinossauros', 'Você resolveu um mistério.');
+      } else {
+        b.classList.add('errada');
+        document.getElementById('quem-feedback').textContent = 'Essa não! A resposta correta é ' + q.o[q.c] + '.';
+      }
+      area.querySelectorAll('button').forEach(x => x.disabled = true);
+    };
+    area.appendChild(b);
+  });
+}
+
+function proximoQuem() {
+  quemAtual = (quemAtual + 1) % quemSou.length;
+  renderizarQuem();
+}
+
+const botaoQuem = document.createElement('button');
+botaoQuem.className = 'btn secundario';
+botaoQuem.textContent = 'Próximo mistério';
+botaoQuem.style.marginTop = '12px';
+botaoQuem.onclick = proximoQuem;
+document.querySelector('.jogo h3').closest('.jogo');
+document.getElementById('quem-opcoes').after(botaoQuem);
+
+function verificarMissoes() {
+  const tarefas = [
+    visitouDinos ? '✓ Você descobriu uma espécie.' : '○ Descubra o segredo de um dinossauro.',
+    quizConcluido ? '✓ Você terminou o desafio de perguntas.' : '○ Termine o desafio dos exploradores.',
+    fosseisEncontrados > 0 ? '✓ Você encontrou um fóssil.' : '○ Encontre um fóssil na escavação.'
+  ];
+  document.getElementById('feedback-missoes').innerHTML = tarefas.join('<br>');
+  if (visitouDinos && quizConcluido && fosseisEncontrados > 0) {
+    conquistar('Explorador lendário', 'Você completou todas as missões principais.');
+    document.getElementById('feedback-missoes').innerHTML += '<br><br>Parabéns! Você completou todas as missões principais!';
+  }
+}
+
+const fatosCientificos = [
+  'As rochas sedimentares são locais importantes para encontrar fósseis, porque podem preservar restos e marcas de organismos.',
+  'Os cientistas usam diferentes evidências, como fósseis, camadas de rochas e comparações entre espécies, para reconstruir o passado.',
+  'A idade de muitos fósseis é estimada estudando as camadas geológicas e usando métodos científicos de datação.',
+  'Os fósseis também podem preservar pegadas, ninhos, ovos e marcas deixadas por animais antigos.'
+];
+let fatoIndice = 0;
+
+function mostrarFato() {
+  document.getElementById('fato-cientifico').textContent = fatosCientificos[fatoIndice];
+  fatoIndice = (fatoIndice + 1) % fatosCientificos.length;
+  ganharPontos(2, 'Descoberta científica');
+}
+
+function criarParticulas() {
+  const area = document.getElementById('particulas');
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('span');
+    p.className = 'particula';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = (-10 - Math.random() * 30) + 'px';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (-Math.random() * 15) + 's';
+    p.style.width = (2 + Math.random() * 4) + 'px';
+    p.style.height = p.style.width;
+    area.appendChild(p);
+  }
+}
+
+function animacoesScroll() {
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add('visivel');
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.animar-scroll').forEach(el => observador.observe(el));
+}
+
+criarParticulas();
+animacoesScroll();
+renderizarQuiz();
+renderizarHistoria(0);
+novaEscavacao();
+iniciarMemoria();
+renderizarQuem();
+atualizarPainel();
 </script>
 </body>
 </html>
